@@ -1,7 +1,9 @@
 import '/dashboard/side_nav/side_nav_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home_model.dart';
 export 'home_model.dart';
@@ -13,10 +15,89 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 410.ms,
+          begin: const Offset(-100.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 80.ms,
+          duration: 190.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 570.ms,
+          begin: const Offset(-100.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 90.ms,
+          duration: 190.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 420.ms,
+          begin: const Offset(-100.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 40.ms,
+          duration: 190.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 240.ms,
+          begin: const Offset(0.0, 64.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 130.ms,
+          duration: 180.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -145,21 +226,29 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['containerOnPageLoadAnimation']!),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 4.0),
-                            child: Text(
-                              'Dashboard',
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
-                            ),
-                          ),
-                          Text(
-                            'Elearning offline, anytime you need it',
-                            style: FlutterFlowTheme.of(context).labelMedium,
-                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 4.0),
+                                child: Text(
+                                  'Dashboard',
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium,
+                                ),
+                              ),
+                              Text(
+                                'Elearning offline, anytime you need it',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                            ],
+                          ).animateOnPageLoad(
+                              animationsMap['columnOnPageLoadAnimation']!),
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -229,7 +318,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                               ),
                             ],
-                          ),
+                          ).animateOnPageLoad(
+                              animationsMap['rowOnPageLoadAnimation']!),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 30.0, 0.0, 50.0),
@@ -624,7 +714,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   ),
                                 ),
                               ],
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['wrapOnPageLoadAnimation']!),
                           ),
                         ],
                       ),

@@ -1,7 +1,9 @@
 import '/dashboard/side_nav/side_nav_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'saved_lessons_model.dart';
 export 'saved_lessons_model.dart';
 
@@ -12,10 +14,71 @@ class SavedLessonsWidget extends StatefulWidget {
   State<SavedLessonsWidget> createState() => _SavedLessonsWidgetState();
 }
 
-class _SavedLessonsWidgetState extends State<SavedLessonsWidget> {
+class _SavedLessonsWidgetState extends State<SavedLessonsWidget>
+    with TickerProviderStateMixin {
   late SavedLessonsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 250.ms,
+          begin: const Offset(-100.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 80.ms,
+          duration: 160.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 320.ms,
+          begin: const Offset(-100.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 80.ms,
+          duration: 160.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 10.ms,
+          duration: 250.ms,
+          begin: const Offset(0.0, 46.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 80.ms,
+          duration: 160.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -107,6 +170,8 @@ class _SavedLessonsWidgetState extends State<SavedLessonsWidget> {
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
                                       child: Align(
                                         alignment:
@@ -138,21 +203,29 @@ class _SavedLessonsWidgetState extends State<SavedLessonsWidget> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['containerOnPageLoadAnimation']!),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 4.0),
-                            child: Text(
-                              'SAVED LESSONS ',
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
-                            ),
-                          ),
-                          Text(
-                            'View all your saved lessons and assesments',
-                            style: FlutterFlowTheme.of(context).labelMedium,
-                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 4.0),
+                                child: Text(
+                                  'SAVED LESSONS ',
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium,
+                                ),
+                              ),
+                              Text(
+                                'View all your saved lessons and assesments',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                            ],
+                          ).animateOnPageLoad(
+                              animationsMap['columnOnPageLoadAnimation']!),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 30.0, 0.0, 50.0),
@@ -468,7 +541,8 @@ class _SavedLessonsWidgetState extends State<SavedLessonsWidget> {
                                   ),
                                 ),
                               ],
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['wrapOnPageLoadAnimation']!),
                           ),
                         ],
                       ),
