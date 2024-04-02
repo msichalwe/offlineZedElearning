@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'home_p_widget.dart' show HomePWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
+class HomePModel extends FlutterFlowModel<HomePWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

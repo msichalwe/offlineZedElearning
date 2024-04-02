@@ -1,4 +1,4 @@
-import '/dashboard/side_nav/side_nav_widget.dart';
+import '/draft/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'web_flow04_widget.dart' show WebFlow04Widget;
 import 'package:flutter/material.dart';
@@ -10,8 +10,6 @@ class WebFlow04Model extends FlutterFlowModel<WebFlow04Widget> {
   // Model for sideNav component.
   late SideNavModel sideNavModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
@@ -22,8 +20,4 @@ class WebFlow04Model extends FlutterFlowModel<WebFlow04Widget> {
     unfocusNode.dispose();
     sideNavModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

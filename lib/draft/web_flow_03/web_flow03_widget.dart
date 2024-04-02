@@ -1,26 +1,26 @@
-import '/dashboard/side_nav/side_nav_widget.dart';
+import '/draft/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'web_flow04_model.dart';
-export 'web_flow04_model.dart';
+import 'web_flow03_model.dart';
+export 'web_flow03_model.dart';
 
-class WebFlow04Widget extends StatefulWidget {
-  const WebFlow04Widget({super.key});
+class WebFlow03Widget extends StatefulWidget {
+  const WebFlow03Widget({super.key});
 
   @override
-  State<WebFlow04Widget> createState() => _WebFlow04WidgetState();
+  State<WebFlow03Widget> createState() => _WebFlow03WidgetState();
 }
 
-class _WebFlow04WidgetState extends State<WebFlow04Widget> {
-  late WebFlow04Model _model;
+class _WebFlow03WidgetState extends State<WebFlow03Widget> {
+  late WebFlow03Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => WebFlow04Model());
+    _model = createModel(context, () => WebFlow03Model());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -51,7 +51,7 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                 updateCallback: () => setState(() {}),
                 updateOnChange: true,
                 child: const SideNavWidget(
-                  selectedNav: 4,
+                  selectedNav: 3,
                 ),
               ),
               Expanded(
@@ -76,14 +76,23 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 4.0),
                             child: Text(
-                              'Page Four',
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
+                              'Page Three',
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Text(
                             'Below is where you can place your content.',
-                            style: FlutterFlowTheme.of(context).labelMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -113,6 +122,7 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                                           .bodyLarge
                                           .override(
                                             fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                           ),
                                     ),
@@ -122,7 +132,11 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                                       child: Text(
                                         'You can adjust the navigation items in the left navigation by editing the component. The selected state is triggered by the \"selectedNav\" parameter in the sideNav component. ',
                                         style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -140,7 +154,11 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                                           Text(
                                             'Desktop Template',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ].divide(const SizedBox(width: 12.0)),
                                       ),
@@ -148,7 +166,11 @@ class _WebFlow04WidgetState extends State<WebFlow04Widget> {
                                     Text(
                                       'You will first need to increase the screen size to tablet or desktop.',
                                       style: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ],
                                 ),

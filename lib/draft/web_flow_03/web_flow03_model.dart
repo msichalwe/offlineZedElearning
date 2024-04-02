@@ -1,16 +1,14 @@
-import '/dashboard/side_nav/side_nav_widget.dart';
+import '/draft/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'saved_lessons_widget.dart' show SavedLessonsWidget;
+import 'web_flow03_widget.dart' show WebFlow03Widget;
 import 'package:flutter/material.dart';
 
-class SavedLessonsModel extends FlutterFlowModel<SavedLessonsWidget> {
+class WebFlow03Model extends FlutterFlowModel<WebFlow03Widget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -22,8 +20,4 @@ class SavedLessonsModel extends FlutterFlowModel<SavedLessonsWidget> {
     unfocusNode.dispose();
     sideNavModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -29,12 +30,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const HomeWidget(),
+      errorBuilder: (context, state) => const OnboardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const HomeWidget(),
+          builder: (context, _) => const OnboardingWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -60,6 +61,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'webFlow_03',
           path: '/webFlow03',
           builder: (context, params) => const WebFlow03Widget(),
+        ),
+        FFRoute(
+          name: 'onboarding',
+          path: '/onboarding',
+          builder: (context, params) => const OnboardingWidget(),
+        ),
+        FFRoute(
+          name: 'subjects',
+          path: '/subjects',
+          builder: (context, params) => const SubjectsWidget(),
+        ),
+        FFRoute(
+          name: 'Details48PropertyListing',
+          path: '/details48PropertyListing',
+          builder: (context, params) => const Details48PropertyListingWidget(),
+        ),
+        FFRoute(
+          name: 'HomeP',
+          path: '/homeP',
+          builder: (context, params) => const HomePWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
