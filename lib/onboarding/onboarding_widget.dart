@@ -1,3 +1,4 @@
+import '/components/choose_profile_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -311,7 +312,29 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                               0.0, 40.0, 8.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.goNamed('Home');
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: const Color(0xD3FFFFFF),
+                                context: context,
+                                builder: (context) {
+                                  return GestureDetector(
+                                    onTap: () => _model
+                                            .unfocusNode.canRequestFocus
+                                        ? FocusScope.of(context)
+                                            .requestFocus(_model.unfocusNode)
+                                        : FocusScope.of(context).unfocus(),
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: SizedBox(
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                1.0,
+                                        child: const ChooseProfileWidget(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
                             },
                             text: 'Get Started',
                             options: FFButtonOptions(

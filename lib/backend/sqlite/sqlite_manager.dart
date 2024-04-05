@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '/backend/sqlite/init.dart';
 import 'queries/read.dart';
+import 'queries/update.dart';
 
 import 'package:sqflite/sqflite.dart';
 export 'queries/read.dart';
@@ -59,6 +60,28 @@ class SQLiteManager {
   /// END READ QUERY CALLS
 
   /// START UPDATE QUERY CALLS
+
+  Future createLocalUser({
+    String? userName,
+    String? userEmail,
+    DateTime? createdAt,
+  }) =>
+      performCreateLocalUser(
+        _database,
+        userName: userName,
+        userEmail: userEmail,
+        createdAt: createdAt,
+      );
+
+  Future updateUserAccountName({
+    String? userName,
+    String? currentId,
+  }) =>
+      performUpdateUserAccountName(
+        _database,
+        userName: userName,
+        currentId: currentId,
+      );
 
   /// END UPDATE QUERY CALLS
 }

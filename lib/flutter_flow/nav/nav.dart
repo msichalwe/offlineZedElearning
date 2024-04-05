@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -73,16 +75,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const SubjectsWidget(),
         ),
         FFRoute(
-          name: 'Details48PropertyListing',
-          path: '/details48PropertyListing',
-          builder: (context, params) => const Details48PropertyListingWidget(),
+          name: 'HomePrimary',
+          path: '/homePrimary',
+          builder: (context, params) => const HomePrimaryWidget(),
         ),
         FFRoute(
-          name: 'HomeP',
-          path: '/homeP',
-          builder: (context, params) => const HomePWidget(),
+          name: 'lessons',
+          path: '/lessons',
+          builder: (context, params) => const LessonsWidget(),
+        ),
+        FFRoute(
+          name: 'assessmentScores',
+          path: '/assessmentScores',
+          builder: (context, params) => const AssessmentScoresWidget(),
+        ),
+        FFRoute(
+          name: 'subject',
+          path: '/subject',
+          builder: (context, params) => const SubjectWidget(),
+        ),
+        FFRoute(
+          name: 'lesson',
+          path: '/lesson',
+          builder: (context, params) => const LessonWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -152,6 +170,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -169,6 +188,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }
