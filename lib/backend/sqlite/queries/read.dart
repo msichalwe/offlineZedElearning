@@ -264,3 +264,61 @@ class GetSingleLessonRow extends SqliteRow {
 }
 
 /// END GET SINGLE LESSON
+
+/// BEGIN GET SINGLE LESSON JSON
+Future<List<GetSingleLessonJsonRow>> performGetSingleLessonJson(
+  Database database, {
+  int? lessonId,
+}) {
+  final query = '''
+SELECT 
+    json_object(
+        'lessonId', l.lesson_id,
+        'lessonName', l.lesson_name,
+        'lessonPhases', (
+            SELECT json_group_array(
+                json_object(
+                    'lessonPhaseId', lp.lesson_phase_id,
+                    'lessonPhaseTypeName', lpt.lesson_phase_types_name,
+                    'mediaFiles', (
+                        SELECT json_group_array(
+                            json_object(
+                                'mediaId', m.media_id,
+                                'mediaType', m.media_type,
+                                'mediaUrl', 'https://yourdomain.com/storage/' || m.media_url,
+                                'mediaName', m.media_name,
+                                'textPosition', m.text_position,
+                                'mediaDescription', m.media_description
+                            )
+                        )
+                        FROM lesson_files lf
+                        LEFT JOIN media m ON lf.media_id = m.media_id
+                        WHERE lf.lesson_phase_id = lp.lesson_phase_id AND m.deleted_at IS NULL
+                    ),
+                    'textContent', t.text_content,
+                    'textId', t.text_id,
+                    'tip', lp.tip
+                )
+            )
+            FROM lesson_phases lp
+            LEFT JOIN lesson_phase_types lpt ON lp.lesson_phase_type_id = lpt.lesson_phase_type_id
+            LEFT JOIN lesson_texts lt ON lp.lesson_phase_id = lt.lesson_phase_id
+            LEFT JOIN texts t ON lt.text_id = t.text_id AND t.deleted_at IS NULL
+            WHERE lp.lesson_id = l.lesson_id
+        )
+    )
+FROM lessons l
+WHERE l.lesson_id = $lessonId
+GROUP BY l.lesson_id;
+''';
+  return _readQuery(database, query, (d) => GetSingleLessonJsonRow(d));
+}
+
+class GetSingleLessonJsonRow extends SqliteRow {
+  GetSingleLessonJsonRow(super.data);
+
+  @override
+  dynamic get data => data['data'] as dynamic;
+}
+
+/// END GET SINGLE LESSON JSON

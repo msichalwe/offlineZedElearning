@@ -93,6 +93,14 @@ class SQLiteManager {
         lessonId: lessonId,
       );
 
+  Future<List<GetSingleLessonJsonRow>> getSingleLessonJson({
+    int? lessonId,
+  }) =>
+      performGetSingleLessonJson(
+        _database,
+        lessonId: lessonId,
+      );
+
   /// END READ QUERY CALLS
 
   /// START UPDATE QUERY CALLS

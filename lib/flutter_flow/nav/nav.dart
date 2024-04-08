@@ -111,6 +111,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'subTopicId',
               ParamType.int,
             ),
+            subtopicName: params.getParam(
+              'subtopicName',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(

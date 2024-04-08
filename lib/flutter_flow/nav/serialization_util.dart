@@ -237,6 +237,8 @@ dynamic deserializeParam<T>(
             return GetLessonsFromSubtopicsRow(data);
           case GetSingleLessonRow:
             return GetSingleLessonRow(data);
+          case GetSingleLessonJsonRow:
+            return GetSingleLessonJsonRow(data);
           default:
             return null;
         }

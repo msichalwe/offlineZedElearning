@@ -10,6 +10,14 @@ class LessonModel extends FlutterFlowModel<LessonWidget> {
   final unfocusNode = FocusNode();
   // Model for nav component.
   late NavModel navModel;
+  // State field(s) for PageView widget.
+  PageController? pageViewController;
+
+  int get pageViewCurrentIndex => pageViewController != null &&
+          pageViewController!.hasClients &&
+          pageViewController!.page != null
+      ? pageViewController!.page!.round()
+      : 0;
   // Model for footer component.
   late FooterModel footerModel;
 
