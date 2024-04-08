@@ -76,12 +76,12 @@ class _NavWidgetState extends State<NavWidget> {
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
             child: Container(
               width: 300.0,
-              height: 50.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
@@ -95,6 +95,7 @@ class _NavWidgetState extends State<NavWidget> {
                         labelStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Readex Pro',
+                                  fontSize: 15.0,
                                   letterSpacing: 0.0,
                                 ),
                         hintStyle:

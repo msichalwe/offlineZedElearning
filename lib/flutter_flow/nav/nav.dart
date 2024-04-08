@@ -102,7 +102,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'lesson',
           path: '/lesson',
-          builder: (context, params) => const LessonWidget(),
+          builder: (context, params) => LessonWidget(
+            lessonId: params.getParam(
+              'lessonId',
+              ParamType.int,
+            ),
+            subTopicId: params.getParam(
+              'subTopicId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'onboardingCopy',

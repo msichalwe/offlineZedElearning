@@ -94,141 +94,155 @@ class _HomePrimaryWidgetState extends State<HomePrimaryWidget> {
                                 ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 50.0, 0.0, 200.0),
-                          child: FutureBuilder<List<GetAllGradesRow>>(
-                            future: SQLiteManager.instance.getAllGrades(),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              final rowGetAllGradesRowList = snapshot.data!;
-                              return Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: List.generate(
-                                    rowGetAllGradesRowList.length, (rowIndex) {
-                                  final rowGetAllGradesRow =
-                                      rowGetAllGradesRowList[rowIndex];
-                                  return InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'gradeDashboard',
-                                        queryParameters: {
-                                          'gradeId': serializeParam(
-                                            rowGetAllGradesRow.gradeid,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 300.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          if (rowGetAllGradesRow.gradename ==
-                                              'Grade 10')
-                                            ClipRRect(
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(0.0),
-                                                bottomRight:
-                                                    Radius.circular(0.0),
-                                                topLeft: Radius.circular(5.0),
-                                                topRight: Radius.circular(5.0),
-                                              ),
-                                              child: Image.asset(
-                                                'assets/images/Screenshot_2024-04-05_at_8.43.10_AM.png',
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          if (rowGetAllGradesRow.gradename ==
-                                              'Grade 11')
-                                            ClipRRect(
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(0.0),
-                                                bottomRight:
-                                                    Radius.circular(0.0),
-                                                topLeft: Radius.circular(5.0),
-                                                topRight: Radius.circular(5.0),
-                                              ),
-                                              child: Image.asset(
-                                                'assets/images/Screenshot_2024-04-05_at_8.43.24_AM.png',
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          if (rowGetAllGradesRow.gradename ==
-                                              'Grade 12')
-                                            ClipRRect(
-                                              borderRadius: const BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(0.0),
-                                                bottomRight:
-                                                    Radius.circular(0.0),
-                                                topLeft: Radius.circular(5.0),
-                                                topRight: Radius.circular(5.0),
-                                              ),
-                                              child: Image.asset(
-                                                'assets/images/Screenshot_2024-04-05_at_8.43.18_AM.png',
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 20.0, 0.0, 20.0),
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                rowGetAllGradesRow.gradename,
-                                                'Grade 10',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 25.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          decoration: const BoxDecoration(),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 50.0, 0.0, 200.0),
+                            child: FutureBuilder<List<GetAllGradesRow>>(
+                              future: SQLiteManager.instance.getAllGrades(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
                                       ),
                                     ),
                                   );
-                                }),
-                              );
-                            },
+                                }
+                                final wrapGetAllGradesRowList = snapshot.data!;
+                                return Wrap(
+                                  spacing: 30.0,
+                                  runSpacing: 20.0,
+                                  alignment: WrapAlignment.center,
+                                  crossAxisAlignment: WrapCrossAlignment.start,
+                                  direction: Axis.horizontal,
+                                  runAlignment: WrapAlignment.start,
+                                  verticalDirection: VerticalDirection.down,
+                                  clipBehavior: Clip.none,
+                                  children: List.generate(
+                                      wrapGetAllGradesRowList.length,
+                                      (wrapIndex) {
+                                    final wrapGetAllGradesRow =
+                                        wrapGetAllGradesRowList[wrapIndex];
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'gradeDashboard',
+                                          queryParameters: {
+                                            'gradeId': serializeParam(
+                                              wrapGetAllGradesRow.gradeId,
+                                              ParamType.int,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 300.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            if (wrapGetAllGradesRow.gradeId ==
+                                                1)
+                                              ClipRRect(
+                                                borderRadius: const BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(0.0),
+                                                  bottomRight:
+                                                      Radius.circular(0.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/Screenshot_2024-04-05_at_8.43.10_AM.png',
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            if (wrapGetAllGradesRow.gradeId ==
+                                                2)
+                                              ClipRRect(
+                                                borderRadius: const BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(0.0),
+                                                  bottomRight:
+                                                      Radius.circular(0.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/Screenshot_2024-04-05_at_8.43.24_AM.png',
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            if (wrapGetAllGradesRow.gradeId ==
+                                                3)
+                                              ClipRRect(
+                                                borderRadius: const BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(0.0),
+                                                  bottomRight:
+                                                      Radius.circular(0.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/Screenshot_2024-04-05_at_8.43.18_AM.png',
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 20.0),
+                                              child: Text(
+                                                valueOrDefault<String>(
+                                                  wrapGetAllGradesRow.gradeName,
+                                                  'Grade 10',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 25.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
                           ),
                         ),
                         wrapWithModel(

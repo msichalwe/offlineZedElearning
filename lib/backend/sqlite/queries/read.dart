@@ -21,8 +21,8 @@ SELECT grade_id AS gradeId, grade_name AS gradeName FROM grades;
 class GetAllGradesRow extends SqliteRow {
   GetAllGradesRow(super.data);
 
-  int? get gradeid => data['gradeid'] as int?;
-  String? get gradename => data['gradename'] as String?;
+  int? get gradeId => data['gradeId'] as int?;
+  String? get gradeName => data['gradeName'] as String?;
 }
 
 /// END GET ALL GRADES
@@ -73,7 +73,7 @@ class GetTopicsInSubjectsFromSylabiRow extends SqliteRow {
   GetTopicsInSubjectsFromSylabiRow(super.data);
 
   int? get topicId => data['topicId'] as int?;
-  int? get topicName => data['topicName'] as int?;
+  String? get topicName => data['topicName'] as String?;
 }
 
 /// END GET TOPICS IN SUBJECTS FROM SYLABI
@@ -172,3 +172,95 @@ class GetSubtopicsFromTopicIdRow extends SqliteRow {
 }
 
 /// END GET SUBTOPICS FROM TOPICID
+
+/// BEGIN GET LESSONS FROM SUBTOPICS
+Future<List<GetLessonsFromSubtopicsRow>> performGetLessonsFromSubtopics(
+  Database database, {
+  int? subtopicId,
+}) {
+  final query = '''
+SELECT DISTINCT l.lesson_name AS lessonName, l.lesson_id AS lessonId
+FROM lessons l
+JOIN outcomes o ON l.outcome_id = o.outcome_id
+JOIN subtopics st ON o.subtopic_id = st.subtopic_id
+JOIN topics t ON st.topic_id = t.topic_id
+JOIN syllabi sy ON t.syllabus_id = sy.syllabus_id
+WHERE st.subtopic_id = $subtopicId
+  AND l.status = 3
+  AND l.deleted_at IS NULL
+ORDER BY l.lesson_order ASC;
+''';
+  return _readQuery(database, query, (d) => GetLessonsFromSubtopicsRow(d));
+}
+
+class GetLessonsFromSubtopicsRow extends SqliteRow {
+  GetLessonsFromSubtopicsRow(super.data);
+
+  String? get lessonName => data['lessonName'] as String?;
+  int? get lessonId => data['lessonId'] as int?;
+}
+
+/// END GET LESSONS FROM SUBTOPICS
+
+/// BEGIN GET SINGLE LESSON
+Future<List<GetSingleLessonRow>> performGetSingleLesson(
+  Database database, {
+  String? lessonId,
+}) {
+  final query = '''
+SELECT 
+    l.lesson_id as lessonId, 
+    l.lesson_name as lessonName, 
+    lp.lesson_phase_id as lessonPhaseId, 
+    lpt.lesson_phase_types_name as lessonPhaseTypeName, 
+    m.media_id as mediaId, 
+    m.media_type as mediaType, 
+    'https://zedelearning.chalotek.com/storage/' || m.media_url AS mediaUrl, 
+    m.media_name as mdiaName, 
+    m.text_position as textPosition, 
+    m.media_description as mediaDescription, 
+    t.text_content as textContent, 
+    t.text_id as textId, 
+    lp.tip as tip
+FROM 
+    lessons l
+JOIN 
+    lesson_phases lp ON l.lesson_id = lp.lesson_id
+JOIN 
+    lesson_phase_types lpt ON lp.lesson_phase_type_id = lpt.lesson_phase_type_id
+LEFT JOIN 
+    lesson_files lf ON lp.lesson_phase_id = lf.lesson_phase_id
+LEFT JOIN 
+    media m ON lf.media_id = m.media_id AND m.deleted_at IS NULL
+LEFT JOIN 
+    lesson_texts lt ON lp.lesson_phase_id = lt.lesson_phase_id
+LEFT JOIN 
+    texts t ON lt.text_id = t.text_id AND t.deleted_at IS NULL
+WHERE 
+    l.lesson_id = $lessonId
+ORDER BY 
+    lp.lesson_phase_id, m.media_id;
+
+''';
+  return _readQuery(database, query, (d) => GetSingleLessonRow(d));
+}
+
+class GetSingleLessonRow extends SqliteRow {
+  GetSingleLessonRow(super.data);
+
+  int? get lessonId => data['lessonId'] as int?;
+  String? get lessonName => data['lessonName'] as String?;
+  int? get lessonPhaseId => data['lessonPhaseId'] as int?;
+  String? get lessonPhaseTypeName => data['lessonPhaseTypeName'] as String?;
+  int? get mediaId => data['mediaId'] as int?;
+  String? get mediaType => data['mediaType'] as String?;
+  String? get mediaUrl => data['mediaUrl'] as String?;
+  String? get mdiaName => data['mdiaName'] as String?;
+  String? get textPosition => data['textPosition'] as String?;
+  String? get mediaDescription => data['mediaDescription'] as String?;
+  String? get textContent => data['textContent'] as String?;
+  String? get tip => data['tip'] as String?;
+  int? get textId => data['textId'] as int?;
+}
+
+/// END GET SINGLE LESSON

@@ -22,7 +22,7 @@ class SQLiteManager {
       return;
     }
     _database = await initializeDatabaseFromDbFile(
-      'lite',
+      'lite_zed',
       'sqlLiteElearning.db',
     );
   }
@@ -75,6 +75,22 @@ class SQLiteManager {
       performGetSubtopicsFromTopicId(
         _database,
         topicId: topicId,
+      );
+
+  Future<List<GetLessonsFromSubtopicsRow>> getLessonsFromSubtopics({
+    int? subtopicId,
+  }) =>
+      performGetLessonsFromSubtopics(
+        _database,
+        subtopicId: subtopicId,
+      );
+
+  Future<List<GetSingleLessonRow>> getSingleLesson({
+    String? lessonId,
+  }) =>
+      performGetSingleLesson(
+        _database,
+        lessonId: lessonId,
       );
 
   /// END READ QUERY CALLS

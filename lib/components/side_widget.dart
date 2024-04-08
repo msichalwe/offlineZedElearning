@@ -294,6 +294,13 @@ class _SideWidgetState extends State<SideWidget> {
                                   ParamType.int,
                                 ),
                               }.withoutNulls,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: const TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 10),
+                                ),
+                              },
                             );
                           },
                           child: Container(

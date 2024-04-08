@@ -233,6 +233,10 @@ dynamic deserializeParam<T>(
             return GetSingleSyllabiRow(data);
           case GetSubtopicsFromTopicIdRow:
             return GetSubtopicsFromTopicIdRow(data);
+          case GetLessonsFromSubtopicsRow:
+            return GetLessonsFromSubtopicsRow(data);
+          case GetSingleLessonRow:
+            return GetSingleLessonRow(data);
           default:
             return null;
         }
