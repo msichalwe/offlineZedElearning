@@ -69,6 +69,14 @@ class SQLiteManager {
         syllabusId: syllabusId,
       );
 
+  Future<List<GetSubtopicsFromTopicIdRow>> getSubtopicsFromTopicId({
+    int? topicId,
+  }) =>
+      performGetSubtopicsFromTopicId(
+        _database,
+        topicId: topicId,
+      );
+
   /// END READ QUERY CALLS
 
   /// START UPDATE QUERY CALLS

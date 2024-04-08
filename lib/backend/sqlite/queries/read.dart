@@ -141,7 +141,34 @@ class GetSingleSyllabiRow extends SqliteRow {
 
   String? get gradeName => data['gradeName'] as String?;
   String? get subjectName => data['subjectName'] as String?;
-  String? get syllabusId => data['syllabusId'] as String?;
+  int? get syllabusId => data['syllabusId'] as int?;
 }
 
 /// END GET SINGLE SYLLABI
+
+/// BEGIN GET SUBTOPICS FROM TOPICID
+Future<List<GetSubtopicsFromTopicIdRow>> performGetSubtopicsFromTopicId(
+  Database database, {
+  int? topicId,
+}) {
+  final query = '''
+SELECT
+    subtopic_id AS subtopicId,
+    subtopic_name AS subtopicName,
+    "order"
+FROM subtopics
+WHERE topic_id = $topicId
+ORDER BY "order" ASC;
+
+''';
+  return _readQuery(database, query, (d) => GetSubtopicsFromTopicIdRow(d));
+}
+
+class GetSubtopicsFromTopicIdRow extends SqliteRow {
+  GetSubtopicsFromTopicIdRow(super.data);
+
+  String? get subtopicName => data['subtopicName'] as String?;
+  int? get subtopicId => data['subtopicId'] as int?;
+}
+
+/// END GET SUBTOPICS FROM TOPICID

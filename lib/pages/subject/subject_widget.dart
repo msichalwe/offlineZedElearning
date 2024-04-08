@@ -35,7 +35,6 @@ class _SubjectWidgetState extends State<SubjectWidget> {
     super.initState();
     _model = createModel(context, () => SubjectModel());
 
-    _model.expandableController = ExpandableController(initialExpanded: false);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -543,7 +542,17 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                 const EdgeInsets.all(
                                                                     20.0),
                                                             child: Text(
-                                                              'Grade 10 Physics',
+                                                              '${valueOrDefault<String>(
+                                                                mainTopicsContainerGetSingleSyllabiRowList
+                                                                    .first
+                                                                    .gradeName,
+                                                                'Grade 10',
+                                                              )} ${valueOrDefault<String>(
+                                                                mainTopicsContainerGetSingleSyllabiRowList
+                                                                    .first
+                                                                    .subjectName,
+                                                                'Physics',
+                                                              )}',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -801,247 +810,298 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                             BorderRadius
                                                                 .circular(0.0),
                                                       ),
-                                                      child:
-                                                          SingleChildScrollView(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(
-                                                                          20.0),
-                                                              child: Text(
-                                                                'General Physics',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          30.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          15.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  const Icon(
-                                                                    Icons
-                                                                        .window_outlined,
-                                                                    color: Color(
-                                                                        0xFFFFB534),
-                                                                    size: 24.0,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      '4 Subtopics',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            fontSize:
-                                                                                18.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Divider(
-                                                              thickness: 0.5,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          20.0,
-                                                                          18.0,
-                                                                          0.0,
-                                                                          18.0),
-                                                              child: Text(
-                                                                'Subtopics',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          25.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              width: double
-                                                                  .infinity,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                            8.0),
+                                                      child: FutureBuilder<
+                                                          List<
+                                                              GetTopicsInSubjectsFromSylabiRow>>(
+                                                        future: SQLiteManager
+                                                            .instance
+                                                            .getTopicsInSubjectsFromSylabi(
+                                                          syllabiId:
+                                                              mainTopicsContainerGetSingleSyllabiRowList
+                                                                  .first
+                                                                  .syllabusId,
+                                                        ),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
                                                                 child:
-                                                                    Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  child:
-                                                                      ExpandableNotifier(
-                                                                    controller:
-                                                                        _model
-                                                                            .expandableController,
-                                                                    child:
-                                                                        ExpandablePanel(
-                                                                      header:
-                                                                          Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            20.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            context.pushNamed('lesson');
-                                                                          },
-                                                                          child:
-                                                                              Text(
-                                                                            'International System of Units',
-                                                                            style: FlutterFlowTheme.of(context).displaySmall.override(
-                                                                                  fontFamily: 'Outfit',
-                                                                                  color: Colors.black,
-                                                                                  fontSize: 25.0,
-                                                                                  letterSpacing: 0.0,
-                                                                                  fontWeight: FontWeight.normal,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      collapsed:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            1.0,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                              20.0,
-                                                                              8.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Text(
-                                                                            '5 lessons',
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  color: const Color(0x8A000000),
-                                                                                  fontSize: 20.0,
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      expanded:
-                                                                          SingleChildScrollView(
-                                                                        child:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Container(
-                                                                              width: double.infinity,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              ),
-                                                                              child: wrapWithModel(
-                                                                                model: _model.testCompModel,
-                                                                                updateCallback: () => setState(() {}),
-                                                                                child: const TestCompWidget(),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                      theme:
-                                                                          const ExpandableThemeData(
-                                                                        tapHeaderToExpand:
-                                                                            true,
-                                                                        tapBodyToExpand:
-                                                                            false,
-                                                                        tapBodyToCollapse:
-                                                                            false,
-                                                                        headerAlignment:
-                                                                            ExpandablePanelHeaderAlignment.center,
-                                                                        hasIcon:
-                                                                            true,
-                                                                      ),
-                                                                    ),
+                                                                    CircularProgressIndicator(
+                                                                  valueColor:
+                                                                      AlwaysStoppedAnimation<
+                                                                          Color>(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
                                                                   ),
                                                                 ),
                                                               ),
+                                                            );
+                                                          }
+                                                          final columnGetTopicsInSubjectsFromSylabiRowList =
+                                                              snapshot.data!;
+                                                          return SingleChildScrollView(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: List.generate(
+                                                                  columnGetTopicsInSubjectsFromSylabiRowList
+                                                                      .length,
+                                                                  (columnIndex) {
+                                                                final columnGetTopicsInSubjectsFromSylabiRow =
+                                                                    columnGetTopicsInSubjectsFromSylabiRowList[
+                                                                        columnIndex];
+                                                                return FutureBuilder<
+                                                                    List<
+                                                                        GetSubtopicsFromTopicIdRow>>(
+                                                                  future: SQLiteManager
+                                                                      .instance
+                                                                      .getSubtopicsFromTopicId(
+                                                                    topicId:
+                                                                        columnGetTopicsInSubjectsFromSylabiRow
+                                                                            .topicId,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              CircularProgressIndicator(
+                                                                            valueColor:
+                                                                                AlwaysStoppedAnimation<Color>(
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    final containerGetSubtopicsFromTopicIdRowList =
+                                                                        snapshot
+                                                                            .data!;
+                                                                    return Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                      ),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.all(20.0),
+                                                                            child:
+                                                                                Text(
+                                                                              valueOrDefault<String>(
+                                                                                columnGetTopicsInSubjectsFromSylabiRow.topicName?.toString(),
+                                                                                'name',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 30.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                    fontWeight: FontWeight.w300,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                                20.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                15.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                const Icon(
+                                                                                  Icons.window_outlined,
+                                                                                  color: Color(0xFFFFB534),
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                  child: Text(
+                                                                                    '${containerGetSubtopicsFromTopicIdRowList.length.toString()} Subtopics',
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Readex Pro',
+                                                                                          fontSize: 18.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                          Divider(
+                                                                            thickness:
+                                                                                0.5,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryText,
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                                20.0,
+                                                                                18.0,
+                                                                                0.0,
+                                                                                18.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Subtopics',
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 25.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                    fontWeight: FontWeight.w300,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                          FutureBuilder<
+                                                                              List<GetSubtopicsFromTopicIdRow>>(
+                                                                            future:
+                                                                                SQLiteManager.instance.getSubtopicsFromTopicId(
+                                                                              topicId: columnGetTopicsInSubjectsFromSylabiRow.topicId,
+                                                                            ),
+                                                                            builder:
+                                                                                (context, snapshot) {
+                                                                              // Customize what your widget looks like when it's loading.
+                                                                              if (!snapshot.hasData) {
+                                                                                return Center(
+                                                                                  child: SizedBox(
+                                                                                    width: 50.0,
+                                                                                    height: 50.0,
+                                                                                    child: CircularProgressIndicator(
+                                                                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                        FlutterFlowTheme.of(context).primary,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              }
+                                                                              final columnGetSubtopicsFromTopicIdRowList = snapshot.data!;
+                                                                              return Column(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: List.generate(columnGetSubtopicsFromTopicIdRowList.length, (columnIndex) {
+                                                                                  final columnGetSubtopicsFromTopicIdRow = columnGetSubtopicsFromTopicIdRowList[columnIndex];
+                                                                                  return Container(
+                                                                                    width: double.infinity,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    ),
+                                                                                    child: Padding(
+                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      child: Container(
+                                                                                        width: double.infinity,
+                                                                                        color: Colors.white,
+                                                                                        child: ExpandableNotifier(
+                                                                                          initialExpanded: false,
+                                                                                          child: ExpandablePanel(
+                                                                                            header: Padding(
+                                                                                              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                                                                                              child: InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  context.pushNamed('lesson');
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    columnGetSubtopicsFromTopicIdRow.subtopicName,
+                                                                                                    'name',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                                        fontFamily: 'Outfit',
+                                                                                                        color: Colors.black,
+                                                                                                        fontSize: 25.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.normal,
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            collapsed: Container(
+                                                                                              width: MediaQuery.sizeOf(context).width * 1.0,
+                                                                                              height: 40.0,
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                              ),
+                                                                                              child: Padding(
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 8.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  '5 lessons',
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: 'Readex Pro',
+                                                                                                        color: const Color(0x8A000000),
+                                                                                                        fontSize: 20.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            expanded: SingleChildScrollView(
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Container(
+                                                                                                    width: double.infinity,
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                    ),
+                                                                                                    child: TestCompWidget(
+                                                                                                      key: Key('Keyh41_${columnIndex}_of_${columnGetSubtopicsFromTopicIdRowList.length}'),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ),
+                                                                                            theme: const ExpandableThemeData(
+                                                                                              tapHeaderToExpand: true,
+                                                                                              tapBodyToExpand: false,
+                                                                                              tapBodyToCollapse: false,
+                                                                                              headerAlignment: ExpandablePanelHeaderAlignment.center,
+                                                                                              hasIcon: true,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                }),
+                                                                              );
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              }),
                                                             ),
-                                                          ],
-                                                        ),
+                                                          );
+                                                        },
                                                       ),
                                                     ),
                                                   ),
