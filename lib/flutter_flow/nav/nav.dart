@@ -40,11 +40,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => const OnboardingWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
-        ),
-        FFRoute(
           name: 'webFlow_04',
           path: '/webFlow04',
           builder: (context, params) => const WebFlow04Widget(),
@@ -80,9 +75,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomePrimaryWidget(),
         ),
         FFRoute(
-          name: 'lessons',
-          path: '/lessons',
-          builder: (context, params) => const LessonsWidget(),
+          name: 'gradeDashboard',
+          path: '/gradeDashboard',
+          builder: (context, params) => GradeDashboardWidget(
+            gradeId: params.getParam(
+              'gradeId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'assessmentScores',
@@ -92,12 +92,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'subject',
           path: '/subject',
-          builder: (context, params) => const SubjectWidget(),
+          builder: (context, params) => SubjectWidget(
+            syllabusId: params.getParam(
+              'syllabusId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'lesson',
           path: '/lesson',
           builder: (context, params) => const LessonWidget(),
+        ),
+        FFRoute(
+          name: 'onboardingCopy',
+          path: '/onboardingCopy',
+          builder: (context, params) => const OnboardingCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

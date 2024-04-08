@@ -127,7 +127,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                     color: Colors.white,
                                     letterSpacing: 0.0,
                                   ),
-                              elevation: 3.0,
+                              elevation: 0.0,
                               borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
@@ -365,7 +365,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                       color: const Color(0xFF066AC8),
                                       letterSpacing: 0.0,
                                     ),
-                                elevation: 2.0,
+                                elevation: 0.0,
                                 borderSide: const BorderSide(
                                   color: Color(0xFF066AC8),
                                   width: 1.0,

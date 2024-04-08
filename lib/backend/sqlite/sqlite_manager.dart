@@ -41,12 +41,12 @@ class SQLiteManager {
         gradeId: gradeId,
       );
 
-  Future<List<GetTopicsInSubjectsRow>> getTopicsInSubjects({
-    String? subjectId,
+  Future<List<GetTopicsInSubjectsFromSylabiRow>> getTopicsInSubjectsFromSylabi({
+    int? syllabiId,
   }) =>
-      performGetTopicsInSubjects(
+      performGetTopicsInSubjectsFromSylabi(
         _database,
-        subjectId: subjectId,
+        syllabiId: syllabiId,
       );
 
   Future<List<GetLessonsInTopicsRow>> getLessonsInTopics({
@@ -55,6 +55,18 @@ class SQLiteManager {
       performGetLessonsInTopics(
         _database,
         topicId: topicId,
+      );
+
+  Future<List<AllLessonsRow>> allLessons() => performAllLessons(
+        _database,
+      );
+
+  Future<List<GetSingleSyllabiRow>> getSingleSyllabi({
+    int? syllabusId,
+  }) =>
+      performGetSingleSyllabi(
+        _database,
+        syllabusId: syllabusId,
       );
 
   /// END READ QUERY CALLS

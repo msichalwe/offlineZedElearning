@@ -48,9 +48,7 @@ class _ChooseProfileWidgetState extends State<ChooseProfileWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      constraints: BoxConstraints(
-        maxWidth: MediaQuery.sizeOf(context).width * 1.0,
-      ),
+      width: MediaQuery.sizeOf(context).width * 1.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(8.0),

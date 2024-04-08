@@ -68,7 +68,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dependency_overrides:
-  http: 1.2.1
+  http: 1.2.0
   uuid: ^4.0.0
 
 dev_dependencies:

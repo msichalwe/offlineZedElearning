@@ -45,8 +45,8 @@ class _FooterWidgetState extends State<FooterWidget> {
         color: FlutterFlowTheme.of(context).primaryText,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
@@ -54,6 +54,15 @@ class _FooterWidgetState extends State<FooterWidget> {
               'assets/images/Coat_of_arms_of_Zambia.svg.png',
               width: 200.0,
               height: 100.0,
+              fit: BoxFit.contain,
+            ),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset(
+              'assets/images/zictalogo.png',
+              width: 200.0,
+              height: 120.0,
               fit: BoxFit.contain,
             ),
           ),

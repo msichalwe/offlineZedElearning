@@ -13,14 +13,16 @@ Future<List<GetAllGradesRow>> performGetAllGrades(
   Database database,
 ) {
   const query = '''
-SELECT * FROM grades;
-
+SELECT grade_id AS gradeId, grade_name AS gradeName FROM grades;
 ''';
   return _readQuery(database, query, (d) => GetAllGradesRow(d));
 }
 
 class GetAllGradesRow extends SqliteRow {
   GetAllGradesRow(super.data);
+
+  int? get gradeid => data['gradeid'] as int?;
+  String? get gradename => data['gradename'] as String?;
 }
 
 /// END GET ALL GRADES
@@ -31,7 +33,7 @@ Future<List<GetSubjectsInGradeRow>> performGetSubjectsInGrade(
   String? gradeId,
 }) {
   final query = '''
-SELECT s.*
+SELECT s.subject_id as subjectId, s.subject_name  AS subjectName, sy.syllabus_id As syllabusId
 FROM subjects s
 JOIN syllabi sy ON s.subject_id = sy.subject_id
 JOIN grades g ON sy.grade_id = g.grade_id
@@ -43,31 +45,38 @@ WHERE g.grade_id = $gradeId;
 
 class GetSubjectsInGradeRow extends SqliteRow {
   GetSubjectsInGradeRow(super.data);
+
+  int? get subjectId => data['subjectId'] as int?;
+  String? get subjectName => data['subjectName'] as String?;
+  int? get syllabusId => data['syllabusId'] as int?;
 }
 
 /// END GET SUBJECTS IN GRADE
 
-/// BEGIN GET TOPICS IN SUBJECTS
-Future<List<GetTopicsInSubjectsRow>> performGetTopicsInSubjects(
+/// BEGIN GET TOPICS IN SUBJECTS FROM SYLABI
+Future<List<GetTopicsInSubjectsFromSylabiRow>>
+    performGetTopicsInSubjectsFromSylabi(
   Database database, {
-  String? subjectId,
+  int? syllabiId,
 }) {
   final query = '''
-SELECT t.*
+SELECT t.topic_id AS topicId, t.topic_name as topicName
 FROM topics t
 JOIN syllabi sy ON t.syllabus_id = sy.syllabus_id
-JOIN subjects s ON sy.subject_id = s.subject_id
-WHERE s.subject_id = $subjectId;
-
+WHERE sy.syllabus_id = $syllabiId;
 ''';
-  return _readQuery(database, query, (d) => GetTopicsInSubjectsRow(d));
+  return _readQuery(
+      database, query, (d) => GetTopicsInSubjectsFromSylabiRow(d));
 }
 
-class GetTopicsInSubjectsRow extends SqliteRow {
-  GetTopicsInSubjectsRow(super.data);
+class GetTopicsInSubjectsFromSylabiRow extends SqliteRow {
+  GetTopicsInSubjectsFromSylabiRow(super.data);
+
+  int? get topicId => data['topicId'] as int?;
+  int? get topicName => data['topicName'] as int?;
 }
 
-/// END GET TOPICS IN SUBJECTS
+/// END GET TOPICS IN SUBJECTS FROM SYLABI
 
 /// BEGIN GET LESSONS IN TOPICS
 Future<List<GetLessonsInTopicsRow>> performGetLessonsInTopics(
@@ -89,3 +98,50 @@ class GetLessonsInTopicsRow extends SqliteRow {
 }
 
 /// END GET LESSONS IN TOPICS
+
+/// BEGIN ALL LESSONS
+Future<List<AllLessonsRow>> performAllLessons(
+  Database database,
+) {
+  const query = '''
+SELECT *
+FROM lessons
+WHERE status = 3;
+
+''';
+  return _readQuery(database, query, (d) => AllLessonsRow(d));
+}
+
+class AllLessonsRow extends SqliteRow {
+  AllLessonsRow(super.data);
+}
+
+/// END ALL LESSONS
+
+/// BEGIN GET SINGLE SYLLABI
+Future<List<GetSingleSyllabiRow>> performGetSingleSyllabi(
+  Database database, {
+  int? syllabusId,
+}) {
+  final query = '''
+SELECT
+    g.grade_name AS gradeName,
+    s.subject_name AS subjectName,
+    sy.syllabus_id AS syllabusId
+FROM syllabi sy
+JOIN subjects s ON sy.subject_id = s.subject_id
+JOIN grades g ON sy.grade_id = g.grade_id
+WHERE sy.syllabus_id = $syllabusId;
+''';
+  return _readQuery(database, query, (d) => GetSingleSyllabiRow(d));
+}
+
+class GetSingleSyllabiRow extends SqliteRow {
+  GetSingleSyllabiRow(super.data);
+
+  String? get gradeName => data['gradeName'] as String?;
+  String? get subjectName => data['subjectName'] as String?;
+  String? get syllabusId => data['syllabusId'] as String?;
+}
+
+/// END GET SINGLE SYLLABI

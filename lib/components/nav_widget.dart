@@ -42,7 +42,7 @@ class _NavWidgetState extends State<NavWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 120.0,
+      height: 160.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
@@ -53,13 +53,22 @@ class _NavWidgetState extends State<NavWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.all(14.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/Coat_of_arms_of_Zambia.svg.png',
-                width: 70.0,
-                height: 70.0,
-                fit: BoxFit.contain,
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/Coat_of_arms_of_Zambia.svg.png',
+                  width: 70.0,
+                  height: 70.0,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
