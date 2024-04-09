@@ -101,6 +101,22 @@ class SQLiteManager {
         lessonId: lessonId,
       );
 
+  Future<List<GetSingleLessonColumnsRow>> getSingleLessonColumns({
+    int? lessonId,
+  }) =>
+      performGetSingleLessonColumns(
+        _database,
+        lessonId: lessonId,
+      );
+
+  Future<List<GetPhasesFromLessonIdRow>> getPhasesFromLessonId({
+    int? lessonId,
+  }) =>
+      performGetPhasesFromLessonId(
+        _database,
+        lessonId: lessonId,
+      );
+
   /// END READ QUERY CALLS
 
   /// START UPDATE QUERY CALLS

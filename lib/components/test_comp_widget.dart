@@ -86,20 +86,25 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                     'lesson',
                     queryParameters: {
                       'lessonId': serializeParam(
-                        columnGetLessonsFromSubtopicsRow.lessonId,
-                        ParamType.int,
-                      ),
-                      'subTopicId': serializeParam(
-                        widget.subtopicID,
+                        valueOrDefault<int>(
+                          columnGetLessonsFromSubtopicsRow.lessonId,
+                          0,
+                        ),
                         ParamType.int,
                       ),
                     }.withoutNulls,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                      ),
+                    },
                   );
                 },
                 child: Container(
                   decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -129,6 +134,7 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                                       fontFamily: 'Readex Pro',
                                       fontSize: 20.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w300,
                                     ),
                               ),
                             ],
@@ -167,7 +173,7 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                                             0.0, 0.0, 0.0, 10.0),
                                         child: LinearPercentIndicator(
                                           percent: 0.0,
-                                          width: 300.0,
+                                          width: 350.0,
                                           lineHeight: 8.0,
                                           animation: true,
                                           animateFromLastPercent: true,
@@ -194,8 +200,8 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                           },
                           text: 'Assessments',
                           options: FFButtonOptions(
-                            width: 200.0,
-                            height: 70.0,
+                            width: 150.0,
+                            height: 50.0,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(

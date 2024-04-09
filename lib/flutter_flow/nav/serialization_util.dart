@@ -239,6 +239,10 @@ dynamic deserializeParam<T>(
             return GetSingleLessonRow(data);
           case GetSingleLessonJsonRow:
             return GetSingleLessonJsonRow(data);
+          case GetSingleLessonColumnsRow:
+            return GetSingleLessonColumnsRow(data);
+          case GetPhasesFromLessonIdRow:
+            return GetPhasesFromLessonIdRow(data);
           default:
             return null;
         }

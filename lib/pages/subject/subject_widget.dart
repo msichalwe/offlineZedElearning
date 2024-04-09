@@ -661,103 +661,114 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                       color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     ),
                                                                                     child: Padding(
-                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                      padding: const EdgeInsets.all(12.0),
                                                                                       child: Container(
-                                                                                        width: double.infinity,
-                                                                                        color: Colors.white,
-                                                                                        child: ExpandableNotifier(
-                                                                                          initialExpanded: false,
-                                                                                          child: ExpandablePanel(
-                                                                                            header: Padding(
-                                                                                              padding: const EdgeInsets.all(18.0),
-                                                                                              child: Text(
-                                                                                                'International System of Units',
-                                                                                                style: FlutterFlowTheme.of(context).displaySmall.override(
-                                                                                                      fontFamily: 'Outfit',
-                                                                                                      color: Colors.black,
-                                                                                                      fontSize: 22.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      fontWeight: FontWeight.normal,
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                            collapsed: FutureBuilder<List<GetLessonsFromSubtopicsRow>>(
-                                                                                              future: SQLiteManager.instance.getLessonsFromSubtopics(
-                                                                                                subtopicId: columnGetSubtopicsFromTopicIdRow.subtopicId,
-                                                                                              ),
-                                                                                              builder: (context, snapshot) {
-                                                                                                // Customize what your widget looks like when it's loading.
-                                                                                                if (!snapshot.hasData) {
-                                                                                                  return Center(
-                                                                                                    child: SizedBox(
-                                                                                                      width: 50.0,
-                                                                                                      height: 50.0,
-                                                                                                      child: CircularProgressIndicator(
-                                                                                                        valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                                          FlutterFlowTheme.of(context).primary,
+                                                                                        decoration: BoxDecoration(
+                                                                                          borderRadius: BorderRadius.circular(14.0),
+                                                                                          border: Border.all(
+                                                                                            color: const Color(0xFFB9B9B9),
+                                                                                          ),
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: const EdgeInsets.all(8.0),
+                                                                                          child: Container(
+                                                                                            width: double.infinity,
+                                                                                            color: Colors.white,
+                                                                                            child: ExpandableNotifier(
+                                                                                              initialExpanded: false,
+                                                                                              child: ExpandablePanel(
+                                                                                                header: Padding(
+                                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    'International System of Units',
+                                                                                                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                                          fontFamily: 'Outfit',
+                                                                                                          color: Colors.black,
+                                                                                                          fontSize: 22.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          fontWeight: FontWeight.normal,
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                                collapsed: FutureBuilder<List<GetLessonsFromSubtopicsRow>>(
+                                                                                                  future: SQLiteManager.instance.getLessonsFromSubtopics(
+                                                                                                    subtopicId: columnGetSubtopicsFromTopicIdRow.subtopicId,
+                                                                                                  ),
+                                                                                                  builder: (context, snapshot) {
+                                                                                                    // Customize what your widget looks like when it's loading.
+                                                                                                    if (!snapshot.hasData) {
+                                                                                                      return Center(
+                                                                                                        child: SizedBox(
+                                                                                                          width: 50.0,
+                                                                                                          height: 50.0,
+                                                                                                          child: CircularProgressIndicator(
+                                                                                                            valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                                              FlutterFlowTheme.of(context).primary,
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    }
+                                                                                                    final containerGetLessonsFromSubtopicsRowList = snapshot.data!;
+                                                                                                    return Container(
+                                                                                                      width: MediaQuery.sizeOf(context).width * 1.0,
+                                                                                                      height: 59.0,
+                                                                                                      decoration: BoxDecoration(
+                                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                      ),
+                                                                                                      child: Padding(
+                                                                                                        padding: const EdgeInsetsDirectional.fromSTEB(20.0, 8.0, 0.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          '${containerGetLessonsFromSubtopicsRowList.length.toString()} Lessons',
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                fontFamily: 'Readex Pro',
+                                                                                                                color: const Color(0x8A000000),
+                                                                                                                fontSize: 20.0,
+                                                                                                                letterSpacing: 0.0,
+                                                                                                              ),
                                                                                                         ),
                                                                                                       ),
-                                                                                                    ),
-                                                                                                  );
-                                                                                                }
-                                                                                                final containerGetLessonsFromSubtopicsRowList = snapshot.data!;
-                                                                                                return Container(
-                                                                                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                                                                                  height: 59.0,
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                                  ),
-                                                                                                  child: Padding(
-                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 8.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      '${containerGetLessonsFromSubtopicsRowList.length.toString()} Lessons',
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: 'Readex Pro',
-                                                                                                            color: const Color(0x8A000000),
-                                                                                                            fontSize: 20.0,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                          ),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            ),
-                                                                                            expanded: SingleChildScrollView(
-                                                                                              child: Column(
-                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                children: [
-                                                                                                  Container(
-                                                                                                    width: double.infinity,
-                                                                                                    decoration: BoxDecoration(
-                                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                                    ),
-                                                                                                    child: Padding(
-                                                                                                      padding: const EdgeInsets.all(16.0),
-                                                                                                      child: wrapWithModel(
-                                                                                                        model: _model.testCompModels.getModel(
-                                                                                                          '${columnGetSubtopicsFromTopicIdRow.subtopicName}${columnGetSubtopicsFromTopicIdRow.subtopicId?.toString()}${columnIndex.toString()}',
-                                                                                                          columnIndex,
+                                                                                                    );
+                                                                                                  },
+                                                                                                ),
+                                                                                                expanded: SingleChildScrollView(
+                                                                                                  child: Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    children: [
+                                                                                                      Container(
+                                                                                                        width: double.infinity,
+                                                                                                        decoration: BoxDecoration(
+                                                                                                          color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                         ),
-                                                                                                        updateCallback: () => setState(() {}),
-                                                                                                        updateOnChange: true,
-                                                                                                        child: TestCompWidget(
-                                                                                                          key: Key(
-                                                                                                            'Keyh41_${'${columnGetSubtopicsFromTopicIdRow.subtopicName}${columnGetSubtopicsFromTopicIdRow.subtopicId?.toString()}${columnIndex.toString()}'}',
+                                                                                                        child: Padding(
+                                                                                                          padding: const EdgeInsets.all(16.0),
+                                                                                                          child: wrapWithModel(
+                                                                                                            model: _model.testCompModels.getModel(
+                                                                                                              '${columnGetSubtopicsFromTopicIdRow.subtopicName}${columnGetSubtopicsFromTopicIdRow.subtopicId?.toString()}${columnIndex.toString()}',
+                                                                                                              columnIndex,
+                                                                                                            ),
+                                                                                                            updateCallback: () => setState(() {}),
+                                                                                                            updateOnChange: true,
+                                                                                                            child: TestCompWidget(
+                                                                                                              key: Key(
+                                                                                                                'Keyh41_${'${columnGetSubtopicsFromTopicIdRow.subtopicName}${columnGetSubtopicsFromTopicIdRow.subtopicId?.toString()}${columnIndex.toString()}'}',
+                                                                                                              ),
+                                                                                                              subtopicID: columnGetSubtopicsFromTopicIdRow.subtopicId!,
+                                                                                                            ),
                                                                                                           ),
-                                                                                                          subtopicID: columnGetSubtopicsFromTopicIdRow.subtopicId!,
                                                                                                         ),
                                                                                                       ),
-                                                                                                    ),
+                                                                                                    ],
                                                                                                   ),
-                                                                                                ],
+                                                                                                ),
+                                                                                                theme: const ExpandableThemeData(
+                                                                                                  tapHeaderToExpand: true,
+                                                                                                  tapBodyToExpand: false,
+                                                                                                  tapBodyToCollapse: false,
+                                                                                                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                                                                                                  hasIcon: true,
+                                                                                                ),
                                                                                               ),
-                                                                                            ),
-                                                                                            theme: const ExpandableThemeData(
-                                                                                              tapHeaderToExpand: true,
-                                                                                              tapBodyToExpand: false,
-                                                                                              tapBodyToCollapse: false,
-                                                                                              headerAlignment: ExpandablePanelHeaderAlignment.center,
-                                                                                              hasIcon: true,
                                                                                             ),
                                                                                           ),
                                                                                         ),
