@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:school_platform_windows/backend/sqlite/sqlite_manager.dart';
 import 'onboarding_model.dart';
 export 'onboarding_model.dart';
 
@@ -20,6 +22,10 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
 
   @override
   void initState() {
+    fetchGrade();
+    fetchName();
+    fetchAssessmentId();
+    // fetchAllGradeAnswers();
     super.initState();
     _model = createModel(context, () => OnboardingModel());
 
@@ -31,6 +37,75 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
     _model.dispose();
 
     super.dispose();
+  }
+  void fetchGrade() async {
+    try {
+  print(Provider.of<FFAppState>(context, listen: false).currentUserId);
+      print('fetchGrade called');
+      var result = await SQLiteManager.instance.getAssessmentGrade(
+          assessmentId:9,
+          userId: int.parse(Provider.of<FFAppState>(context, listen: false).currentUserId));
+
+      for (var gradeRow in result) {
+print('GradeRow: ${gradeRow.data['percentageScore'].toString()}');
+      }
+    } catch (e) {
+      print('Error fetching grade: $e');
+    }
+  }
+  // fetchGrade();
+    void fetchAssessmentId() async {
+    try {
+  print(Provider.of<FFAppState>(context, listen: false).currentUserId);
+      print('fetchGrade called');
+      var result = await SQLiteManager.instance.getAssessmentGrade(
+          assessmentId:9,
+          userId: int.parse(Provider.of<FFAppState>(context, listen: false).currentUserId));
+
+      result.forEach((gradeRow) {
+        print('Assessment ID: ${gradeRow.data['assessmentId'].toString()}');
+      });
+
+    } catch (e) {
+      print('Error fetching grade: $e');
+    }
+  }
+
+  void fetchName() async{
+try{
+        print('fetchName called');
+
+var resultA=await SQLiteManager.instance.getAssessmentName(
+  assessmentId: 9,
+  
+  );
+  for (var gradeRow in resultA) {
+    print('Assessment Name: ${gradeRow.data['assessment_name'].toString()}');
+  }
+}catch(e){
+  print('Error fetching Assessment Name: $e');
+
+
+
+
+}
+
+
+  }
+
+  void fetchAllGradeAnswers() async {
+    try {
+      print('fetchAllGradeAnswers called');
+      var result = await SQLiteManager.instance.getGradeAnswers(
+          gradeId: 1,
+       /*GOT**/   userId: 2);
+
+      for (var gradeRow in result) {
+        print('GradeAnswer: ${gradeRow.data['assessment_name'].toString()}');
+      }
+    } catch (e) {
+      print('Error fetching grade: $e');
+    }
   }
 
   @override
@@ -64,6 +139,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                   ),
                 ),
               ),
+              
               Container(
                 width: MediaQuery.sizeOf(context).width * 0.5,
                 height: 932.0,
@@ -170,5 +246,51 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
         ),
       ),
     );
+  }
+}
+class GradeFetcher {
+  final int assessmentId;
+  final BuildContext context;
+
+  GradeFetcher({required this.assessmentId, required this.context});
+
+  void fetchGrade() async {
+    try {
+      print('fetchGrade called');
+      var result = await SQLiteManager.instance.getAssessmentGrade(
+          assessmentId: this.assessmentId,
+          userId: int.parse(Provider.of<FFAppState>(context, listen: false).currentUserId));
+      print('Result: $result');
+    } catch (e) {
+      print('Error fetching grade: $e');
+    }
+  }
+}
+class GradeFetcherWidget extends StatefulWidget {
+  final int assessmentId;
+
+  GradeFetcherWidget({required this.assessmentId});
+
+  @override
+  _GradeFetcherWidgetState createState() => _GradeFetcherWidgetState();
+}
+
+class _GradeFetcherWidgetState extends State<GradeFetcherWidget> {
+  @override
+  void initState() {
+    super.initState();
+    fetchGrade();
+   
+  }
+
+  void fetchGrade() async {
+    GradeFetcher gradeFetcher = GradeFetcher(assessmentId: widget.assessmentId, context: context);
+    gradeFetcher.fetchGrade();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // You can return an empty container if you don't want this widget to display anything
+    return Container();
   }
 }

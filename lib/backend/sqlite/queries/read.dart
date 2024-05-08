@@ -515,6 +515,95 @@ WHERE assessmentId = $assessmentId AND user_id = $userId;
   return _readQuery(database, query, (d) => SingleAssessmentGradeRow(d));
 }
 
+Future<List<singleAssessmentNameRow>> performGetSingleAssessmentName(
+  Database database, {
+  int? assessmentId,
+}) async {
+  final query = '''
+    SELECT *
+FROM assessments
+WHERE assessment_id = $assessmentId;
+  ''';
+
+  return _readQuery(database, query, (d) => singleAssessmentNameRow(d));
+}
+
+
+Future<List<GetAllGradeAnswers>> performGetAllGradeAnswers(
+  Database database, {
+  int? gradeId,
+  int? userId
+
+}) async {
+  final query = '''
+    SELECT *
+FROM answers
+JOIN assessments ON answers.assessmentId = assessments.assessment_id
+JOIN lesson_assessments ON assessments.assessment_id = lesson_assessments.assessment_id
+JOIN lesson_phases ON lesson_assessments.lesson_phase_id = lesson_phases.lesson_phase_id
+JOIN lessons ON lesson_phases.lesson_id = lessons.lesson_id
+JOIN subtopics ON lessons.outcome_id = subtopics.subtopic_id
+JOIN topics ON subtopics.topic_id = topics.topic_id
+JOIN syllabi ON topics.syllabus_id = syllabi.syllabus_id
+JOIN subjects ON syllabi.subject_id = subjects.subject_id
+JOIN grades ON syllabi.grade_id = grades.grade_id
+WHERE grades.grade_id = $gradeId AND answers.user_id = $userId;
+  ''';
+
+  return _readQuery(database, query, (d) => GetAllGradeAnswers(d));
+}
+
+class  GetAllGradeAnswers extends SqliteRow {
+  GetAllGradeAnswers(super.data);
+
+  int? get assessmentId => data['assessment_id'] as int?;
+  String? get assessmentName => data['assessment_name'] as String?;
+  String? get assessmentDescription => data['assessment_description'] as String?;
+  int? get userId => data['user_id'] as int?;
+  int? get gradeId => data['grade_id'] as int?;
+  int? get subjectId => data['subject_id'] as int?;
+  int? get topicId => data['topic_id'] as int?;
+  int? get subtopicId => data['subtopic_id'] as int?;
+  int? get lessonId => data['lesson_id'] as int?;
+  int? get lessonPhaseId => data['lesson_phase_id'] as int?;
+  int? get mediaId => data['media_id'] as int?;
+  String? get mediaType => data['media_type'] as String?;
+  String? get mediaUrl => data['media_url'] as String?;
+  String? get mediaName => data['media_name'] as String?;
+  String? get textPosition => data['text_position'] as String?;
+  String? get mediaDescription => data['media_description'] as String?;
+  String? get textContent => data['text_content'] as String?;
+  String? get tip => data['tip'] as String?;
+  int? get textId => data['text_id'] as int?;
+  String? get questionText => data['question_text'] as String?;
+  String? get questionType => data['question_type'] as String?;
+  String? get correctAnswer => data['correct_answer'] as String;
+  String? get options => data['options'] as String?;
+  String? get answers=> data['percentageScore'] as String?;
+  String? get gradeName => data['grade_name'] as String?;
+  String? get LessonName=>data['lesson_name'] as String?;
+  String? get subjectName=>data['subject_name'] as String?;
+  String? get topicName=>data['topic_name'] as String?;
+}
+
+
+
+
+
+
+
+
+class singleAssessmentNameRow extends SqliteRow {
+  singleAssessmentNameRow(super.data);
+
+  String? get assessmentName => data['assessment_name'] as String?;
+}
+
+
+
+
+
+
 class SingleAssessmentGradeRow extends SqliteRow {
   SingleAssessmentGradeRow(super.data);
 

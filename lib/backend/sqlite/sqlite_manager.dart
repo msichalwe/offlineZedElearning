@@ -23,7 +23,7 @@ class SQLiteManager {
       return;
     }
     _database = await initializeDatabaseFromDbFile(
-      'lite_zed8',
+      'lite_zed',
       'sqlLiteElearning.db',
     );
   }
@@ -150,6 +150,25 @@ class SQLiteManager {
         _database,
         assessmentId: assessmentId,
         userId: userId
+      );
+
+      Future<List<singleAssessmentNameRow>> getAssessmentName({
+    int? assessmentId,
+  }) =>
+      performGetSingleAssessmentName(
+        _database,
+        assessmentId: assessmentId,
+      );
+
+      Future<List<GetAllGradeAnswers>> getGradeAnswers({
+    int? gradeId,
+    int? userId,
+  }) =>
+      performGetAllGradeAnswers(
+        _database,
+        gradeId: gradeId,
+        userId: userId,
+ 
       );
 
   /// END READ QUERY CALLS

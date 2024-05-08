@@ -17,6 +17,7 @@ class _GradeWidgetState extends State<GradeWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: SQLiteManager.instance.getAssessmentGrade(assessmentId: widget.assessmentId, userId: int.parse(Provider.of<FFAppState>(context, listen: false).currentUserId)),
+
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // While the future is loading, display a loading indicator
@@ -35,7 +36,7 @@ class _GradeWidgetState extends State<GradeWidget> {
             child: Text(
               "$percentageScore",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 74,
                 fontWeight: FontWeight.bold,
               ),
             ),
