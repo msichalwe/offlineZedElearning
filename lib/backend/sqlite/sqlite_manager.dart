@@ -13,9 +13,11 @@ class SQLiteManager {
   SQLiteManager._();
 
   static SQLiteManager? _instance;
+
   static SQLiteManager get instance => _instance ??= SQLiteManager._();
 
   static late Database _database;
+
   Database get database => _database;
 
   static Future initialize() async {
@@ -126,26 +128,15 @@ class SQLiteManager {
         lessonAssessmentId: lessonId,
       );
 
-  Future<List<LessonGradeCountRow>> getLessonGradeCount({
-    int? gradeId, String? subjectName
-  }) =>
-      performGetLessonGradeCount(
-        _database,
-        gradeId: gradeId,
-        subjectName: subjectName
-      );
+  Future<List<LessonGradeCountRow>> getLessonGradeCount(
+          {int? gradeId, String? subjectName}) =>
+      performGetLessonGradeCount(_database,
+          gradeId: gradeId, subjectName: subjectName);
 
-
-      Future<List<AssessmentGradeCountRow>> getAssessmentGradeCount({
-    int? gradeId,
-    String? subjectName
-  }) =>
-      performGetAssessmentGradeCount(
-        _database,
-        gradeId: gradeId,
-        subjectName: subjectName
-
-      );
+  Future<List<AssessmentGradeCountRow>> getAssessmentGradeCount(
+          {int? gradeId, String? subjectName}) =>
+      performGetAssessmentGradeCount(_database,
+          gradeId: gradeId, subjectName: subjectName);
 
   Future<List<SingleAssessmentRow>> getAssessment({
     int? assessmentId,
@@ -155,14 +146,37 @@ class SQLiteManager {
         assessmentId: assessmentId,
       );
 
-      Future<List<SingleAssessmentGradeRow>> getAssessmentGrade({
-    int? assessmentId,
-    int? userId
-  }) =>
-      performGetSingleAssessmentGrade(
-        _database,
-        assessmentId: assessmentId,
-        userId: userId
+  Future<List<SingleAssessmentGradeRow>> getAssessmentGrade(
+          {int? assessmentId, int? userId}) =>
+      performGetSingleAssessmentGrade(_database,
+          assessmentId: assessmentId, userId: userId);
+
+
+  Future<List<SearchSubtopic>> getSubtopicQuery(
+      {String? subtopic}) =>
+      searchSubtopic(_database,
+          subtopic: subtopic );
+
+
+  Future<List<Syllabi>> getSyllabi(
+      {String? search}) =>
+      searchSyllabi(_database,
+          searchTerm: search );
+
+  Future<List<CountLessons>> countLessons(
+      ) =>
+      lessonCount(_database,
+           );
+
+  Future<List<CountAssessments>> countAssessments(
+      ) =>
+      assessmentCount(_database,
+      );
+
+
+  Future<List<ScoreSheetData>> getScoresheetData(
+      ) =>
+      scoresheetData(_database,
       );
 
   /// END READ QUERY CALLS

@@ -1,8 +1,12 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:school_platform_windows/backend/sqlite/sqlite_manager.dart';
 import 'package:school_platform_windows/index.dart';
 
+import '../../backend/offline_sqlite.dart';
 import '/components/banner_widget.dart';
 import '/components/footer_widget.dart';
 import '/components/nav_widget.dart';
@@ -19,6 +23,7 @@ export 'view_assessment_model.dart';
 
 class ViewAssessmentWidget extends StatefulWidget {
   final int? assessmentId;
+
   const ViewAssessmentWidget({super.key, this.assessmentId});
 
   @override
@@ -29,6 +34,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
   late ViewAssessmentModel _model;
   late int _currentQuestionIndex = 0; // Initialize current question index
   Map? selectedAnswers = {}; // List to store selected answers
+  final DBHelper dbHelper = DBHelper();
 
   TextEditingController _textController = TextEditingController();
 
@@ -50,7 +56,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
   }
 
   String? stripHtmlTags(String htmlString) {
-    return parse(htmlString).text;
+    return parse(htmlString).body!.text;
   }
 
   void _showModal(BuildContext context, percentage, text) {
@@ -178,7 +184,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
               builder:
                   (context, AsyncSnapshot<List<SingleAssessmentRow>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (snapshot.hasError) {
@@ -228,7 +234,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: 'Roboto',
                                       color: Colors.white,
                                       letterSpacing: 0.0,
                                     ),
@@ -244,7 +250,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(40, 20, 40, 40),
+                        padding: const EdgeInsets.fromLTRB(40, 20, 40, 40),
                         child: Material(
                           elevation: 0,
                           child: Container(
@@ -689,7 +695,6 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                 'answer': _textController.text
                                               };
                                             }
-                                            print(selectedAnswers);
 
                                             double percentage = 0;
                                             var correctAnswers = 0;
@@ -708,20 +713,27 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                 assessmentList.length *
                                                 100;
 
-                                            final user =
-                                                Provider.of<FFAppState>(context,
-                                                        listen: false)
-                                                    .currentUserId;
+                                            final user = FFAppState()
+                                                .currentUser
+                                                .hashCode;
 
-                                            await SQLiteManager.instance
-                                                .createGrade(
-                                              user_id: int.parse(user),
-                                              assessmentId: widget.assessmentId,
+                                            var kaya = selectedAnswers;
+
+                                            final codec =
+                                                StandardMessageCodec();
+                                            ByteData? byteData =
+                                                codec.encodeMessage(kaya);
+                                            Uint8List bytes = byteData!.buffer
+                                                .asUint8List(
+                                                    byteData.offsetInBytes,
+                                                    byteData.lengthInBytes);
+
+                                            await dbHelper.createGrade(
+                                              userId: user,
+                                              assessmentId:
+                                                  widget.assessmentId as int,
                                               percentageScore: percentage,
-                                              submittedAnswers: jsonEncode(
-                                                stripHtmlTags(
-                                                    selectedAnswers.toString()),
-                                              ),
+                                              submittedAnswers: bytes,
                                             );
 
                                             _showModal(context, percentage,
@@ -741,7 +753,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily: 'Readex Pro',
+                                                      fontFamily: 'Roboto',
                                                       color: FlutterFlowTheme
                                                               .of(context)
                                                           .secondaryBackground,
@@ -763,9 +775,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                         child: FFButtonWidget(
                                           onPressed: () {
                                             setState(() {
-                                              _currentQuestionIndex++;
-                                              _currentQuestionIndex %=
-                                                  assessmentList.length;
+
 
                                               if (assessmentList[
                                                           _currentQuestionIndex]
@@ -781,6 +791,10 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
 
                                                 _textController.text = '';
                                               }
+
+                                              _currentQuestionIndex++;
+                                              _currentQuestionIndex %=
+                                                  assessmentList.length;
                                             });
                                           },
                                           text: 'Next Question',

@@ -1,3 +1,6 @@
+import 'package:provider/provider.dart';
+import 'package:school_platform_windows/pages/search/search_screen_widget.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,8 @@ class NavWidget extends StatefulWidget {
 
 class _NavWidgetState extends State<NavWidget> {
   late NavModel _model;
+
+  String? searchVal;
 
   @override
   void setState(VoidCallback callback) {
@@ -42,7 +47,7 @@ class _NavWidgetState extends State<NavWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 160.0,
+      height: 140.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
@@ -84,9 +89,20 @@ class _NavWidgetState extends State<NavWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        8.0, 0.0, 8.0, 0.0),
                     child: TextFormField(
-                      controller: _model.textController,
+                      initialValue: Provider.of<FFAppState>(context, listen: true)
+                                  .searchValue,
+                      onChanged: (value) {
+                        FFAppState().update(() {
+                          FFAppState().searchValue = value;
+                        });
+
+                        setState(() {
+                          searchVal = value;
+                        });
+                      },
                       focusNode: _model.textFieldFocusNode,
                       autofocus: true,
                       obscureText: false,
@@ -94,13 +110,13 @@ class _NavWidgetState extends State<NavWidget> {
                         labelText: 'Search',
                         labelStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: 'Roboto',
                                   fontSize: 15.0,
                                   letterSpacing: 0.0,
                                 ),
                         hintStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                         enabledBorder: OutlineInputBorder(
@@ -131,13 +147,23 @@ class _NavWidgetState extends State<NavWidget> {
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        suffixIcon: Icon(
-                          Icons.search_sharp,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            if (searchVal == '') {
+                              return;
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SearchScreenWidget()));
+                          },
+                          icon: const Icon(Icons.search_sharp),
                           color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
+                            fontFamily: 'Roboto',
                             letterSpacing: 0.0,
                           ),
                       minLines: null,

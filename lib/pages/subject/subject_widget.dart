@@ -74,8 +74,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                   child: const BannerWidget(),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      35.0, 35.0, 0.0, 35.0),
+                  padding: const EdgeInsetsDirectional.all(15),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -157,33 +156,22 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                   Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
-                                                            .fromSTEB(30.0, 0.0,
-                                                            0.0, 0.0),
-                                                    child: Card(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      elevation: 0.0,
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  5.0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  5.0),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  5.0),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  5.0),
-                                                        ),
+                                                            .fromSTEB(34.0, 0.0,
+                                                            4.0, 0.0),
+                                                    child: Container(
+                                                      padding: EdgeInsets.all(0),
+                                                      decoration: BoxDecoration(
+
+                                                        color: FlutterFlowTheme
+                                                            .of(context)
+                                                            .secondaryBackground,
+                                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                          border: Border.all(
+                                                              color: Colors.grey[300] as Color
+                                                          )
+
                                                       ),
+
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -219,7 +207,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                         0.0,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w300,
+                                                                            .bold,
                                                                   ),
                                                             ),
                                                           ),
@@ -253,9 +241,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                     FFButtonWidget(
                                                                       onPressed:
                                                                           () {
-                                                                       
 
-                                                                        
+
+
                                                                       },
                                                                       text:
                                                                           'Media Library',
@@ -472,7 +460,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                           RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(5.0),
+                                                                .circular(10.0),
                                                       ),
                                                       child: FutureBuilder<
                                                           List<
@@ -562,8 +550,12 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                     return Container(
                                                                       decoration:
                                                                           BoxDecoration(
+                                                                            borderRadius: BorderRadius.all(Radius.circular(10)),
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryBackground,
+                                                                            border: Border.all(
+                                                                              color: Colors.grey[300] as Color
+                                                                            )
                                                                       ),
                                                                       child:
                                                                           Column(
@@ -585,7 +577,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                     fontFamily: 'Roboto',
                                                                                     fontSize: 30.0,
                                                                                     letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.w300,
+                                                                                    fontWeight: FontWeight.bold,
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -612,6 +604,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                           fontFamily: 'Roboto',
                                                                                           fontSize: 18.0,
                                                                                           letterSpacing: 0.0,
+
                                                                                         ),
                                                                                   ),
                                                                                 ),
@@ -637,7 +630,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                     fontFamily: 'Roboto',
                                                                                     fontSize: 25.0,
                                                                                     letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.w300,
+                                                                                    fontWeight: FontWeight.bold,
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -695,7 +688,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                                   child: Text(
                                                                                                     '${columnGetSubtopicsFromTopicIdRow.subtopicName}',
                                                                                                     style: FlutterFlowTheme.of(context).displaySmall.override(
-                                                                                                          fontFamily: 'Outfit',
+                                                                                                          fontFamily: 'Roboto',
                                                                                                           color: Colors.black,
                                                                                                           fontSize: 22.0,
                                                                                                           letterSpacing: 0.0,

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/backend/sqlite/sqlite_manager.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -21,6 +23,29 @@ class LessonCountBannerWidget extends StatefulWidget {
 class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
     with TickerProviderStateMixin {
   late LessonCountBannerModel _model;
+
+  Future<Map<String, int>> getFullProgressLessonsCount() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final Map<String, int> userProgressCount = {};
+
+    final Set<String> keys = prefs.getKeys();
+
+    for (String key in keys) {
+      if (key.contains('-')) {
+        List<String> parts = key.split('-');
+        if (parts.length >= 2) {
+          String userId = parts[0];
+          int? progress = prefs.getInt(key);
+
+          if (progress != null && progress == 100) {
+            userProgressCount[userId] = (userProgressCount[userId] ?? 0) + 1;
+          }
+        }
+      }
+    }
+
+    return userProgressCount;
+  }
 
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(
@@ -118,7 +143,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                   final containerAllLessonsRowList = snapshot.data!;
                   return Container(
                     width: 270.0,
-                    height: 120.0,
+                    height: 100.0,
                     decoration: BoxDecoration(
                       color: const Color(0xFFFFE5D5),
                       borderRadius: BorderRadius.circular(10.0),
@@ -132,7 +157,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                           child: Icon(
                             Icons.computer_rounded,
                             color: Color(0xFFFD7E14),
-                            size: 80.0,
+                            size: 70.0,
                           ),
                         ),
                         Padding(
@@ -175,19 +200,20 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
             FutureBuilder(
               future: SQLiteManager.instance.getAssessmentGradeCount(
                   gradeId:
-                      Provider.of<FFAppState>(context, listen: false).gradeId, subjectName: Provider.of<FFAppState>(context, listen: false).subjectName),
+                      Provider.of<FFAppState>(context, listen: false).gradeId,
+                  subjectName: Provider.of<FFAppState>(context, listen: false)
+                      .subjectName),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                 
                   return Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: Container(
                       width: 280.0,
-                      height: 120.0,
+                      height: 100.0,
                       decoration: BoxDecoration(
                         color: const Color(0xFFCAB9E8),
                         borderRadius: BorderRadius.circular(10.0),
@@ -201,7 +227,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                             child: FaIcon(
                               FontAwesomeIcons.clipboardCheck,
                               color: Color(0xFF6F42C1),
-                              size: 80.0,
+                              size: 70.0,
                             ),
                           ),
                           Padding(
@@ -212,16 +238,16 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-  '${snapshot.hasData && snapshot.data!.isNotEmpty && snapshot.data!.first.totalAssessments != null ? snapshot.data!.first.totalAssessments : 0}',
-  style: FlutterFlowTheme.of(context)
-      .bodyMedium
-      .override(
-        fontFamily: 'Roboto',
-        fontSize: 19.0,
-        letterSpacing: 0.0,
-        fontWeight: FontWeight.bold,
-      ),
-),
+                                  '${snapshot.hasData && snapshot.data!.isNotEmpty && snapshot.data!.first.totalAssessments != null ? snapshot.data!.first.totalAssessments : 0}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 19.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
                                 Text(
                                   'Total Assessments',
                                   style: FlutterFlowTheme.of(context)
@@ -242,61 +268,71 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                 }
               },
             ),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Container(
-                height: 120.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFC2EEE1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.medal,
-                        color: Color(0xFF0CBC87),
-                        size: 80.0,
+            FutureBuilder(
+                future: getFullProgressLessonsCount(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFC2EEE1),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
+                      child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '300 ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 19.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          const Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.medal,
+                              color: Color(0xFF0CBC87),
+                              size: 70.0,
+                            ),
                           ),
-                          Text(
-                            'Completed Lessons',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  letterSpacing: 0.0,
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${snapshot.data![FFAppState().currentUser.hashCode.toString()] ?? 0}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 19.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
+                                Text(
+                                  'Completed Lessons',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Roboto',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                        ].divide(const SizedBox(width: 15.0)),
                       ),
-                    ),
-                  ].divide(const SizedBox(width: 15.0)),
-                ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation3']!),
-            ),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation3']!),
+                  );
+                }),
           ],
         ),
       ),

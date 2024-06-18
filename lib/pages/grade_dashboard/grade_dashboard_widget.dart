@@ -78,7 +78,6 @@ class _GradeDashboardWidgetState extends State<GradeDashboardWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 644.0,
                             decoration: const BoxDecoration(),
                             child: wrapWithModel(
                               model: _model.sideModel,

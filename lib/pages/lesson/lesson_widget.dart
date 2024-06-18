@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:school_platform_windows/pages/assessment/assessment_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,6 +72,19 @@ class _LessonWidgetState extends State<LessonWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => LessonModel());
+    _loadProgress();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_model.pageViewController!.hasClients) {
+        _model.pageViewController!.jumpToPage(4);
+      }
+    });
+
+    print(_progressValue);
+
+    _model.pageViewController = PageController(
+        initialPage:
+            calculateCurrentPhase(_progressValue, _lessonLength.toDouble()));
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -80,6 +94,31 @@ class _LessonWidgetState extends State<LessonWidget>
     _model.dispose();
 
     super.dispose();
+  }
+
+  Future<void> saveLessonProgress(
+      String userId, String lessonId, int progress) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('$userId-$lessonId', progress);
+  }
+
+  Future<int?> getLessonProgress(String userId, String lessonId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('$userId-$lessonId');
+  }
+
+  int calculateCurrentPhase(double progress, double lessonLength) {
+    return ((progress * lessonLength) / 100).round();
+  }
+
+  Future<void> _loadProgress() async {
+    int? progress = await getLessonProgress(
+        FFAppState().currentUser.hashCode.toString(),
+                                          widget.lessonId.toString());
+    setState(() {
+      _progressValue =
+          progress!.toDouble() ?? 0; // Default to 0 if no progress is found
+    });
   }
 
   @override
@@ -163,7 +202,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            fontFamily: 'Roboto',
                                             color: Colors.white,
                                             letterSpacing: 0.0,
                                           ),
@@ -188,7 +227,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            fontFamily: 'Roboto',
                                             fontSize: 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
@@ -205,7 +244,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            fontFamily: 'Roboto',
                                             fontSize: 25.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
@@ -323,7 +362,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -353,7 +392,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -541,7 +580,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                                                               Text(
                                                                             'TIP:',
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Readex Pro',
+                                                                                  fontFamily: 'Roboto',
                                                                                   fontSize: 24.0,
                                                                                   letterSpacing: 0.0,
                                                                                   fontWeight: FontWeight.bold,
@@ -571,7 +610,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                                                           .bodyMedium
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Readex Pro',
+                                                                                'Roboto',
                                                                             fontSize:
                                                                                 18.0,
                                                                             letterSpacing:
@@ -696,7 +735,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                                                         borderRadius:
                                                                             BorderRadius.circular(8.0),
                                                                         child: Image
-                                                                            .network(
+                                                                            .asset(
                                                                           getJsonField(
                                                                             mediaFilesItem,
                                                                             r'''$.mediaUrl''',
@@ -815,6 +854,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                           const Duration(milliseconds: 300),
                                       curve: Curves.ease,
                                     );
+                                    
                                   },
                                   text: 'PREVIOUS',
                                   icon: const FaIcon(
@@ -832,7 +872,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily: 'Roboto',
                                           color: const Color(0xFF007BFF),
                                           letterSpacing: 0.0,
                                         ),
@@ -856,8 +896,11 @@ class _LessonWidgetState extends State<LessonWidget>
                                               100);
 
                                       _currentPhase += 1;
-                                      final SharedPreferences prefs =
-                                          await _prefs;
+
+                                      saveLessonProgress(
+                                          FFAppState().currentUser.hashCode.toString(),
+                                          widget.lessonId.toString(),
+                                          _progressValue.toInt());
 
                                       print('Kaya');
                                       print(_test);
@@ -887,7 +930,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily: 'Roboto',
                                           color: const Color(0xFF007BFF),
                                           letterSpacing: 0.0,
                                         ),
@@ -931,7 +974,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily: 'Roboto',
                                           color: Colors.white,
                                           letterSpacing: 0.0,
                                         ),

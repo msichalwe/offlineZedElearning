@@ -1,3 +1,5 @@
+import 'package:school_platform_windows/pages/score_card/score_card_widget.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -78,14 +80,19 @@ class _HeaderNavWidgetState extends State<HeaderNavWidget> {
               alignment: const AlignmentDirectional(-1.0, -1.0),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  FFAppState().currentUser.userName,
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        fontSize: 25.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                      ),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ScoreCardWidget()));
+                  },
+                  child: Text(
+                    FFAppState().currentUser.userName.toString(),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Roboto',
+                          fontSize: 25.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
               ),
             ),

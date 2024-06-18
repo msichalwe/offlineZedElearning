@@ -22,6 +22,7 @@ class GetAllGradesRow extends SqliteRow {
   GetAllGradesRow(super.data);
 
   int? get gradeId => data['gradeId'] as int?;
+
   String? get gradeName => data['gradeName'] as String?;
 }
 
@@ -47,7 +48,9 @@ class GetSubjectsInGradeRow extends SqliteRow {
   GetSubjectsInGradeRow(super.data);
 
   int? get subjectId => data['subjectId'] as int?;
+
   String? get subjectName => data['subjectName'] as String?;
+
   int? get syllabusId => data['syllabusId'] as int?;
 }
 
@@ -73,6 +76,7 @@ class GetTopicsInSubjectsFromSylabiRow extends SqliteRow {
   GetTopicsInSubjectsFromSylabiRow(super.data);
 
   int? get topicId => data['topicId'] as int?;
+
   String? get topicName => data['topicName'] as String?;
 }
 
@@ -140,7 +144,9 @@ class GetSingleSyllabiRow extends SqliteRow {
   GetSingleSyllabiRow(super.data);
 
   String? get gradeName => data['gradeName'] as String?;
+
   String? get subjectName => data['subjectName'] as String?;
+
   int? get syllabusId => data['syllabusId'] as int?;
 }
 
@@ -168,6 +174,7 @@ class GetSubtopicsFromTopicIdRow extends SqliteRow {
   GetSubtopicsFromTopicIdRow(super.data);
 
   String? get subtopicName => data['subtopicName'] as String?;
+
   int? get subtopicId => data['subtopicId'] as int?;
 }
 
@@ -197,6 +204,7 @@ class GetLessonsFromSubtopicsRow extends SqliteRow {
   GetLessonsFromSubtopicsRow(super.data);
 
   String? get lessonName => data['lessonName'] as String?;
+
   int? get lessonId => data['lessonId'] as int?;
 }
 
@@ -249,17 +257,29 @@ class GetSingleLessonRow extends SqliteRow {
   GetSingleLessonRow(super.data);
 
   int? get lessonId => data['lessonId'] as int?;
+
   String? get lessonName => data['lessonName'] as String?;
+
   int? get lessonPhaseId => data['lessonPhaseId'] as int?;
+
   String? get lessonPhaseTypeName => data['lessonPhaseTypeName'] as String?;
+
   int? get mediaId => data['mediaId'] as int?;
+
   String? get mediaType => data['mediaType'] as String?;
+
   String? get mediaUrl => data['mediaUrl'] as String?;
+
   String? get mdiaName => data['mdiaName'] as String?;
+
   String? get textPosition => data['textPosition'] as String?;
+
   String? get mediaDescription => data['mediaDescription'] as String?;
+
   String? get textContent => data['textContent'] as String?;
+
   String? get tip => data['tip'] as String?;
+
   int? get textId => data['textId'] as int?;
 }
 
@@ -371,7 +391,9 @@ class GetSingleLessonColumnsRow extends SqliteRow {
   GetSingleLessonColumnsRow(super.data);
 
   int? get lessonId => data['lessonId'] as int?;
+
   String? get lessonName => data['lessonName'] as String?;
+
   List<dynamic>? get lessonPhases => data['lessonPhases'] as List<dynamic>?;
 }
 
@@ -418,10 +440,15 @@ class GetPhasesFromLessonIdRow extends SqliteRow {
   GetPhasesFromLessonIdRow(super.data);
 
   int? get lessonPhaseId => data['lessonPhaseId'] as int?;
+
   String? get lessonPhaseTypeName => data['lessonPhaseTypeName'] as String?;
+
   String? get mediaFiles => data['mediaFiles'] as String?;
+
   String? get textContent => data['textContent'] as String?;
+
   int? get textId => data['textId'] as int?;
+
   String? get tip => data['tip'] as String?;
 }
 
@@ -449,7 +476,9 @@ class GetLessonAssessmentsRow extends SqliteRow {
   GetLessonAssessmentsRow(super.data);
 
   int? get assessmentId => data['assessment_id'] as int?;
+
   String? get assessmentName => data['assessment_name'] as String?;
+
   String? get assessmentDescription =>
       data['assessment_description'] as String?;
 }
@@ -490,6 +519,7 @@ class LessonGradeCountRow extends SqliteRow {
   LessonGradeCountRow(super.data);
 
   String? get gradeName => data['grade_name'] as String?;
+
   int? get totalLessons => data['total_lessons'] as int?;
 }
 
@@ -578,8 +608,12 @@ class SingleAssessmentRow extends SqliteRow {
   SingleAssessmentRow(super.data);
 
   String? get questionText => data['question_text'] as String?;
+
   String? get questionType => data['question_type'] as String?;
+
   String? get correctAnswer => data['correct_answer'] as String;
+  // String? get name => data['assessment_name'] as String;
+
   String? get options => data['options'] as String?;
 }
 
@@ -601,3 +635,158 @@ class SingleAssessmentGradeRow extends SqliteRow {
 
   int? get percentageScore => data['percentageScore'] as int?;
 }
+
+
+
+
+/*Future<List<SearchSubtopic>> searchSubtopic(
+    Database database,
+    {String? subtopic,
+    }) async {
+  final query = '''
+   SELECT
+      subtopic_name AS Subtopic_Name,
+      subtopic_id AS Subtopic_id,
+      topic_id AS Topic_id
+    FROM
+      subtopics
+    WHERE
+      subtopic_name LIKE '%' || '$subtopic' || '%'
+    ORDER BY
+      subtopic_name;''';
+
+  return _readQuery(database, query, (d) => SearchSubtopic(d));
+}
+
+class SearchSubtopic extends SqliteRow {
+  SearchSubtopic(super.data);
+
+  String? get subtopic => data['Subtopic_Name'] as String?;
+  int? get id => data['Subtopic_id'] as int?;
+  int? get topic_id => data['Topic_id'] as int?;
+}*/
+
+
+
+Future<List<SearchSubtopic>> searchSubtopic(
+    Database database,
+    {String? subtopic,
+      }) async {
+  final query = '''
+   SELECT lesson_id, lesson_name
+FROM lessons
+WHERE lesson_name LIKE '%$subtopic%' ''';
+
+  return _readQuery(database, query, (d) => SearchSubtopic(d));
+}
+
+class SearchSubtopic extends SqliteRow {
+  SearchSubtopic(super.data);
+
+    String? get lesson_name => data['lesson_name'] as String?;
+    int? get id => data['lesson_id'] as int?;
+}
+
+
+Future<List<Syllabi>> searchSyllabi(
+    Database database,
+    {String? searchTerm,
+    }) async {
+  final query = '''
+   SELECT
+    sy.syllabus_id,
+    g.grade_name,
+    s.subject_name,
+    g.grade_name || ' ' || s.subject_name AS syllabus_name
+FROM
+    syllabi sy
+INNER JOIN
+    grades g ON sy.grade_id = g.grade_id
+INNER JOIN
+    subjects s ON sy.subject_id = s.subject_id
+WHERE
+    g.grade_name LIKE '%$searchTerm%' OR
+    s.subject_name LIKE '%$searchTerm%' ''';
+
+  return _readQuery(database, query, (d) => Syllabi(d));
+}
+
+class Syllabi extends SqliteRow {
+  Syllabi(super.data);
+
+  String? get name => data['syllabus_name'] as String?;
+  int? get id => data['syllabus_id'] as int?;
+}
+
+
+Future<List<CountLessons>> lessonCount(
+    Database database,
+    ) async {
+  const query = '''
+   SELECT COUNT(*) AS total_lessons FROM lessons; ''';
+
+  return _readQuery(database, query, (d) => CountLessons(d));
+}
+
+class CountLessons extends SqliteRow {
+  CountLessons(super.data);
+
+  int? get total => data['total_lessons'] as int?;
+}
+
+Future<List<CountAssessments>> assessmentCount(
+    Database database,
+    ) async {
+  const query = '''
+   SELECT COUNT(*) AS total_assessments FROM assessments; ''';
+
+  return _readQuery(database, query, (d) => CountAssessments(d));
+}
+
+class CountAssessments extends SqliteRow {
+  CountAssessments(super.data);
+
+  int? get total => data['total_assessments'] as int?;
+}
+
+Future<List<ScoreSheetData>> scoresheetData(
+    Database database,
+    ) async {
+  const query = '''
+   SELECT
+    s.subject_name,
+    t.topic_name,
+    a.assessment_name,
+    a.assessment_id,
+    AVG(ans.percentageScore) AS Average_Score
+FROM
+    subjects s
+JOIN
+    syllabi sy ON sy.subject_id = s.subject_id
+JOIN
+    topics t ON t.syllabus_id = sy.syllabus_id
+JOIN
+    assessments a ON a.assessment_id = t.topic_id
+LEFT JOIN
+    answers ans ON ans.assessmentId = a.assessment_id
+GROUP BY
+    s.subject_name, t.topic_name, a.assessment_name
+ORDER BY
+    s.subject_name, t.topic_name, a.assessment_name; ''';
+
+  return _readQuery(database, query, (d) => ScoreSheetData(d));
+}
+
+class ScoreSheetData extends SqliteRow {
+  ScoreSheetData(super.data);
+
+  String? get subject_name => data['subject_name'] as String?;
+  String? get topic_name => data['subject_name'] as String?;
+  String? get assessment_name => data['assessment_name'] as String?;
+  double? get Average_Score => data['Average_Score'] as double?;
+  int? get assessment_id => data['assessment_id'] as int?;
+}
+
+
+
+

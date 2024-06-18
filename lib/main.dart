@@ -63,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('en', '')],
+
       theme: ThemeData(
         brightness: Brightness.light,
       ),
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: _themeMode,
       routerConfig: _router,
+      themeAnimationCurve: Curves.easeIn,
     );
   }
 }

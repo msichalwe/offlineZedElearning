@@ -13,6 +13,7 @@ class FFAppState extends ChangeNotifier {
   String? gradeName = '';
   int? gradeId = 0;
   String? subjectName = 'Dashboard';
+  String? searchValue = '';
 
   FFAppState._internal();
 

@@ -39,7 +39,7 @@ class _BannerWidgetState extends State<BannerWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200.0,
+      height: 100.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

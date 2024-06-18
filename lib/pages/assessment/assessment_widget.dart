@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:school_platform_windows/backend/sqlite/sqlite_manager.dart';
 import 'package:school_platform_windows/pages/assessment/score.dart';
 import 'package:school_platform_windows/pages/view_assessment/view_assessment_widget.dart';
+import 'package:school_platform_windows/pages/view_results/view_results_widget.dart';
 
 import '/components/banner_widget.dart';
 import '/components/footer_widget.dart';
@@ -115,7 +116,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               fontSize: 30,
                                               letterSpacing: 0,
                                               fontWeight: FontWeight.w800,
@@ -176,7 +177,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Readex Pro',
+                                                                    'Roboto',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
@@ -191,7 +192,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Readex Pro',
+                                                                    'Roboto',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
@@ -199,6 +200,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                                     0,
                                                               ),
                                                         ),
+
                                                       ],
                                                     ),
                                                   ),
@@ -277,7 +279,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                                       .bodyMedium
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Readex Pro',
+                                                                            'Roboto',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .primaryText,
                                                                         letterSpacing:
@@ -290,7 +292,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                                         context,
                                                                         MaterialPageRoute(
                                                                             builder: (context) =>
-                                                                                GradeWidget(assessmentId: snapshot.data!.first.assessmentId as int)));
+                                                                                ViewResultsWidget(lessonId: snapshot.data!.first.assessmentId as int)));
                                                                   },
                                                                   child: Text(
                                                                     'View Results',
@@ -299,7 +301,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).primaryText,
                                                                           letterSpacing:

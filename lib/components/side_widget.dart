@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:school_platform_windows/index.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '/backend/sqlite/sqlite_manager.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -86,10 +88,10 @@ class _SideWidgetState extends State<SideWidget> {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: double.infinity,
-                    height: 50.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: Provider.of<FFAppState>(context, listen: false)
                                   .subjectName
@@ -171,10 +173,10 @@ class _SideWidgetState extends State<SideWidget> {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: double.infinity,
-                    height: 50.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
                       color: const Color(0x00FFFFFF),
                       borderRadius: BorderRadius.circular(10.0),
@@ -213,52 +215,91 @@ class _SideWidgetState extends State<SideWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        10.0, 0.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.robot,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 25.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Virtual Labs ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  fontSize: 15.0,
-                                  letterSpacing: 0.0,
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Access Virtual Labs'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text('You can access the virtual labs online.'),
+                              SizedBox(height: 10),
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Click here to visit: ',
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'The Virtual Labs',
+                                      style: TextStyle(color: Colors.blue),
+                                      recognizer: TapGestureRecognizer()..onTap = () {
+                                        // Code to open the link
+                                        launch('https://zedelearning.chalotek.com/');
+                                      },
+                                    ),
+                                  ],
                                 ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      color: const Color(0x00FFFFFF),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.robot,
+                            color: FlutterFlowTheme.of(context).primaryBackground,
+                            size: 25.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Virtual Labs ',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Roboto',
+                                color: FlutterFlowTheme.of(context).primaryBackground,
+                                fontSize: 15.0,
+                                letterSpacing: 0.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: double.infinity,
-                  height: 50.0,
+                  height: 40.0,
                   decoration: BoxDecoration(
                     color: const Color(0x00FFFFFF),
                     borderRadius: BorderRadius.circular(10.0),
@@ -350,7 +391,7 @@ class _SideWidgetState extends State<SideWidget> {
                           },
                           child: Container(
                             width: double.infinity,
-                            height: 50.0,
+                            height: 40.0,
                             decoration: BoxDecoration(
                               color: Provider.of<FFAppState>(context,
                                               listen: false)
