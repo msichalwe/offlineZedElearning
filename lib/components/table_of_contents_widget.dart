@@ -70,15 +70,15 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
           return Container(
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).alternate,
-              borderRadius: BorderRadius.circular(14.0),
+              borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.only(top: 24.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 7.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                     child: FutureBuilder<List<GetSingleSyllabiRow>>(
                       future: SQLiteManager.instance.getSingleSyllabi(
                         syllabusId: widget.sylabasId,
@@ -140,13 +140,14 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
                               .toList();
                       return Column(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(topics.length, (topicsIndex) {
                           final topicsItem = topics[topicsIndex];
                           return Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 10.0, 10.0, 10.0),
                             child: Container(
+                              padding: EdgeInsets.only(left: 20,bottom: 10),
                               width: 350.0,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(0.0),
@@ -156,14 +157,16 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${topicsIndex.toString()}. ${topicsItem.topicName}',
+                                    ' ${topicsItem.topicName}',
+                                    // '${(topicsIndex + 1).toString()}. ${topicsItem.topicName}',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Roboto',
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
-                                          fontSize: 25.0,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -210,7 +213,7 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: Text(
-                                                '${columnIndex.toString()}. ${columnGetSubtopicsFromTopicIdRow.subtopicName}',
+                                                '${(columnIndex + 1).toString()}. ${columnGetSubtopicsFromTopicIdRow.subtopicName}',
                                                 textAlign: TextAlign.start,
                                                 style: FlutterFlowTheme.of(
                                                         context)

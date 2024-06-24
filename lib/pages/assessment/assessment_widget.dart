@@ -56,7 +56,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -92,7 +92,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                 EdgeInsetsDirectional.fromSTEB(40, 10, 0, 0),
                             child: Material(
                               color: Colors.transparent,
-                              elevation: 0.5,
+                              elevation: 0.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -100,9 +100,15 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                 width: 900,
                                 height: 300,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(12),
+
+                                    color: FlutterFlowTheme
+                                        .of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    border: Border.all(
+                                        color: Color(0xFFEFF1F2) as Color
+                                    )
+
                                 ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -113,20 +119,25 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                           20, 20, 0, 20),
                                       child: Text(
                                         '${Provider.of<FFAppState>(context, listen: false).gradeName}',
-                                        style: FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme
+                                            .of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Roboto',
-                                              fontSize: 30,
-                                              letterSpacing: 0,
-                                              fontWeight: FontWeight.w800,
-                                            ),
+                                          fontFamily:
+                                          'Roboto',
+                                          fontSize:
+                                          28.0,
+                                          letterSpacing:
+                                          0.0,
+                                          fontWeight:
+                                          FontWeight
+                                              .w500,
+                                        ),
                                       ),
                                     ),
                                     Divider(
                                       thickness: 1,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
+                                      color: Color(0xFFEFF1F2),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -170,36 +181,36 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Text(
+                                                        Padding(padding: EdgeInsets.only(left: 5), child: Text(
                                                           'Assessment Title',
                                                           style: FlutterFlowTheme
-                                                                  .of(context)
+                                                              .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                                letterSpacing:
-                                                                    0,
-                                                              ),
-                                                        ),
-                                                        Text(
+                                                            fontFamily:
+                                                            'Roboto',
+                                                            color: FlutterFlowTheme.of(
+                                                                context)
+                                                                .secondaryBackground,
+                                                            letterSpacing:
+                                                            0,
+                                                          ),
+                                                        ),),
+                                                        Padding(padding: EdgeInsets.only(right: 10), child: Text(
                                                           'Action',
                                                           style: FlutterFlowTheme
-                                                                  .of(context)
+                                                              .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                                letterSpacing:
-                                                                    0,
-                                                              ),
-                                                        ),
+                                                            fontFamily:
+                                                            'Roboto',
+                                                            color: FlutterFlowTheme.of(
+                                                                context)
+                                                                .secondaryBackground,
+                                                            letterSpacing:
+                                                            0,
+                                                          ),
+                                                        ),),
 
                                                       ],
                                                     ),

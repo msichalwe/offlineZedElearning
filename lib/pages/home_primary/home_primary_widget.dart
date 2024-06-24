@@ -48,6 +48,7 @@ class _HomePrimaryWidgetState extends State<HomePrimaryWidget> {
           child: Stack(
             children: [
               SingleChildScrollView(
+                physics: ScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -68,7 +69,8 @@ class _HomePrimaryWidgetState extends State<HomePrimaryWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              120.0, 50.0, 0.0, 0.0),
                           child: Text(
                             'Pick a grade ☝️',
                             style: FlutterFlowTheme.of(context)
@@ -83,7 +85,7 @@ class _HomePrimaryWidgetState extends State<HomePrimaryWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 0.0, 8.0, 8.0),
+                              120.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'Pick a grade below to view its content, pretty easily actually.',
                             style: FlutterFlowTheme.of(context)

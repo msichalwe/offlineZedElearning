@@ -151,70 +151,70 @@ class _SideWidgetState extends State<SideWidget> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  FFAppState().update(() {
-                    FFAppState().subjectName = 'Assessment Scores';
-                  });
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration(milliseconds: 300),
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return SlideTransition(
-                          position: Tween<Offset>(
-                            begin: const Offset(1.0, 0.0),
-                            end: Offset.zero,
-                          ).animate(animation),
-                          child: AssessmentScoresWidget(),
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 40.0,
-                    decoration: BoxDecoration(
-                      color: const Color(0x00FFFFFF),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          10.0, 0.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.dashboard_customize_outlined,
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            size: 25.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                10.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              'Assessment Scores',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Roboto',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    fontSize: 15.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     FFAppState().update(() {
+              //       FFAppState().subjectName = 'Assessment Scores';
+              //     });
+              //     // Navigator.push(
+              //     //   context,
+              //     //   PageRouteBuilder(
+              //     //     transitionDuration: Duration(milliseconds: 300),
+              //     //     pageBuilder: (context, animation, secondaryAnimation) {
+              //     //       return SlideTransition(
+              //     //         position: Tween<Offset>(
+              //     //           begin: const Offset(1.0, 0.0),
+              //     //           end: Offset.zero,
+              //     //         ).animate(animation),
+              //     //         child: AssessmentScoresWidget(),
+              //     //       );
+              //     //     },
+              //     //   ),
+              //     // );
+              //   },
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Container(
+              //       width: double.infinity,
+              //       height: 40.0,
+              //       decoration: BoxDecoration(
+              //         color: const Color(0x00FFFFFF),
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       child: Padding(
+              //         padding: const EdgeInsetsDirectional.fromSTEB(
+              //             10.0, 0.0, 0.0, 0.0),
+              //         child: Row(
+              //           mainAxisSize: MainAxisSize.max,
+              //           children: [
+              //             Icon(
+              //               Icons.dashboard_customize_outlined,
+              //               color:
+              //                   FlutterFlowTheme.of(context).primaryBackground,
+              //               size: 25.0,
+              //             ),
+              //             Padding(
+              //               padding: const EdgeInsetsDirectional.fromSTEB(
+              //                   10.0, 0.0, 0.0, 0.0),
+              //               child: Text(
+              //                 'Assessment Scores',
+              //                 style: FlutterFlowTheme.of(context)
+              //                     .bodyMedium
+              //                     .override(
+              //                       fontFamily: 'Roboto',
+              //                       color:
+              //                           FlutterFlowTheme.of(context).alternate,
+              //                       fontSize: 15.0,
+              //                       letterSpacing: 0.0,
+              //                     ),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               GestureDetector(
                 onTap: () {
                   showDialog(

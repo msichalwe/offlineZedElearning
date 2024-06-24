@@ -184,14 +184,14 @@ class _LessonWidgetState extends State<LessonWidget>
                                     onPressed: () async {
                                       context.safePop();
                                     },
-                                    text: 'GENERAL PHYSICS',
+                                    text: 'Back',
                                     icon: const Icon(
                                       Icons.arrow_back,
-                                      size: 15.0,
+                                      size: 10.0,
                                     ),
                                     options: FFButtonOptions(
-                                      width: 250.0,
-                                      height: 40.0,
+                                      width: 100.0,
+                                      height: 30.0,
                                       padding:
                                           const EdgeInsetsDirectional.fromSTEB(
                                               24.0, 0.0, 24.0, 0.0),
@@ -217,7 +217,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                   Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 15.0, 0.0, 0.0),
+                                            0.0, 25.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         containerGetSingleLessonColumnsRowList
@@ -228,9 +228,9 @@ class _LessonWidgetState extends State<LessonWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Roboto',
-                                            fontSize: 30.0,
+                                            fontSize: 28.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                     ).animateOnPageLoad(animationsMap[
                                         'textOnPageLoadAnimation']!),
@@ -238,14 +238,14 @@ class _LessonWidgetState extends State<LessonWidget>
                                   Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 15.0, 0.0, 0.0),
+                                            0.0, 5.0, 0.0, 0.0),
                                     child: Text(
                                       'Lesson Video Playlist',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Roboto',
-                                            fontSize: 25.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -264,7 +264,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             SizedBox(
-                                              height: 100.0,
+                                              height: 50.0,
                                               child: VerticalDivider(
                                                 thickness: 0.5,
                                                 color:
@@ -289,15 +289,15 @@ class _LessonWidgetState extends State<LessonWidget>
                                                           8.0),
                                                   child: Image.asset(
                                                     'assets/images/Screenshot_2024-03-21_at_4.48.20_PM.png',
-                                                    width: 204.0,
-                                                    height: 90.0,
+                                                    width: 100.0,
+                                                    height: 50.0,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              height: 100.0,
+                                              height: 50.0,
                                               child: VerticalDivider(
                                                 thickness: 0.5,
                                                 color:
@@ -322,8 +322,8 @@ class _LessonWidgetState extends State<LessonWidget>
                                                           8.0),
                                                   child: Image.asset(
                                                     'assets/images/Screenshot_2024-03-21_at_4.49.02_PM.png',
-                                                    width: 204.0,
-                                                    height: 90.0,
+                                                    width: 100.0,
+                                                    height: 50.0,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -340,36 +340,36 @@ class _LessonWidgetState extends State<LessonWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 0.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.globe,
-                                          color: Color(0xFF0668C9),
-                                          size: 24.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Grade 10 Physics',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Roboto',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding:
+                                  //       const EdgeInsetsDirectional.fromSTEB(
+                                  //           0.0, 8.0, 0.0, 8.0),
+                                  //   child: Row(
+                                  //     mainAxisSize: MainAxisSize.max,
+                                  //     mainAxisAlignment:
+                                  //         MainAxisAlignment.spaceBetween,
+                                  //     children: [
+                                  //       const FaIcon(
+                                  //         FontAwesomeIcons.globe,
+                                  //         color: Color(0xFF0668C9),
+                                  //         size: 24.0,
+                                  //       ),
+                                  //       Padding(
+                                  //         padding: const EdgeInsetsDirectional
+                                  //             .fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                  //         child: Text(
+                                  //           'Grade 10 Physics',
+                                  //           style: FlutterFlowTheme.of(context)
+                                  //               .bodyMedium
+                                  //               .override(
+                                  //                 fontFamily: 'Roboto',
+                                  //                 letterSpacing: 0.0,
+                                  //               ),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                   Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
@@ -388,7 +388,8 @@ class _LessonWidgetState extends State<LessonWidget>
                                           padding: const EdgeInsetsDirectional
                                               .fromSTEB(10.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'Last updated on 05-08-2023',
+                                            'Last updated at ${containerGetSingleLessonColumnsRowList
+                                                .first.createdAt}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -695,7 +696,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                                           return Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .max,
+                                                                    .min,
                                                             children: List.generate(
                                                                 mediaFiles
                                                                     .length,
@@ -709,7 +710,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                                                 child: Column(
                                                                   mainAxisSize:
                                                                       MainAxisSize
-                                                                          .max,
+                                                                          .min,
                                                                   children: [
                                                                     if ((functions.convertJsonPathToString(getJsonField(
                                                                                   mediaFilesItem,

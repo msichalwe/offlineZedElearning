@@ -56,12 +56,12 @@ class _SubjectWidgetState extends State<SubjectWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 wrapWithModel(
                   model: _model.navModel,
@@ -80,9 +80,11 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             wrapWithModel(
                               model: _model.sideModel,
@@ -133,7 +135,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                   Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            30.0, 0.0, 0.0, 0.0),
+                                            20.0, 10.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -167,7 +169,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                             .secondaryBackground,
                                                           borderRadius: BorderRadius.all(Radius.circular(10)),
                                                           border: Border.all(
-                                                              color: Colors.grey[300] as Color
+                                                              color: Color(0xFFEFF1F2) as Color
                                                           )
 
                                                       ),
@@ -202,20 +204,18 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                     fontFamily:
                                                                         'Roboto',
                                                                     fontSize:
-                                                                        30.0,
+                                                                        28.0,
                                                                     letterSpacing:
                                                                         0.0,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .bold,
+                                                                            .w500,
                                                                   ),
                                                             ),
                                                           ),
                                                           Divider(
                                                             thickness: 0.5,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
+                                                            color: Color(0xFFEFF1F2) ,
                                                           ),
                                                           Column(
                                                             mainAxisSize:
@@ -272,8 +272,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                             .override(
                                                                               fontFamily: 'Roboto',
                                                                               color: const Color(0xFF008DDA),
-                                                                              fontSize: 19.0,
-                                                                              letterSpacing: 0.0,
+                                                                            fontSize: 18.0,
+                                                                            letterSpacing: 0.0,
+                                                                            fontWeight: FontWeight.w400
                                                                             ),
                                                                         elevation:
                                                                             0.0,
@@ -321,8 +322,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                             .override(
                                                                               fontFamily: 'Roboto',
                                                                               color: const Color(0xFF65B741),
-                                                                              fontSize: 19.0,
-                                                                              letterSpacing: 0.0,
+                                                                            fontSize: 18.0,
+                                                                            letterSpacing: 0.0,
+                                                                            fontWeight: FontWeight.w400
                                                                             ),
                                                                         elevation:
                                                                             0.0,
@@ -370,8 +372,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                             .override(
                                                                               fontFamily: 'Roboto',
                                                                               color: const Color(0xFFFFB534),
-                                                                              fontSize: 19.0,
+                                                                              fontSize: 18.0,
                                                                               letterSpacing: 0.0,
+                                                                          fontWeight: FontWeight.w400
                                                                             ),
                                                                         elevation:
                                                                             0.0,
@@ -419,8 +422,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                             .override(
                                                                               fontFamily: 'Roboto',
                                                                               color: const Color(0xFFE72929),
-                                                                              fontSize: 19.0,
-                                                                              letterSpacing: 0.0,
+                                                                            fontSize: 18.0,
+                                                                            letterSpacing: 0.0,
+                                                                            fontWeight: FontWeight.w400
                                                                             ),
                                                                         elevation:
                                                                             0.0,
@@ -554,7 +558,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryBackground,
                                                                             border: Border.all(
-                                                                              color: Colors.grey[300] as Color
+                                                                              color: Color(0xFFEFF1F2) as Color
                                                                             )
                                                                       ),
                                                                       child:
@@ -575,9 +579,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Roboto',
-                                                                                    fontSize: 30.0,
+                                                                                    fontSize: 24.0,
                                                                                     letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontWeight: FontWeight.w400,
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -614,8 +618,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                           Divider(
                                                                             thickness:
                                                                                 0.5,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
+                                                                            color: Color(0xFFEFF1F2) ,
                                                                           ),
                                                                           Padding(
                                                                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -628,9 +631,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                               'Subtopics',
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Roboto',
-                                                                                    fontSize: 25.0,
+                                                                                    fontSize: 20.0,
                                                                                     letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontWeight: FontWeight.w300,
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -672,7 +675,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                         decoration: BoxDecoration(
                                                                                           borderRadius: BorderRadius.circular(14.0),
                                                                                           border: Border.all(
-                                                                                            color: const Color(0xFFB9B9B9),
+                                                                                            color: const Color(0xFFEFF1F2) ,
                                                                                           ),
                                                                                         ),
                                                                                         child: Padding(
@@ -690,9 +693,9 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                                     style: FlutterFlowTheme.of(context).displaySmall.override(
                                                                                                           fontFamily: 'Roboto',
                                                                                                           color: Colors.black,
-                                                                                                          fontSize: 22.0,
+                                                                                                          fontSize: 20.0,
                                                                                                           letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.normal,
+                                                                                                          fontWeight: FontWeight.w300,
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
@@ -728,8 +731,8 @@ class _SubjectWidgetState extends State<SubjectWidget> {
                                                                                                           '${containerGetLessonsFromSubtopicsRowList.length.toString()} Lessons',
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                 fontFamily: 'Roboto',
-                                                                                                                color: const Color(0x8A000000),
-                                                                                                                fontSize: 20.0,
+                                                                                                                fontSize: 18.0,
+                                                                                                                fontWeight: FontWeight.w300,
                                                                                                                 letterSpacing: 0.0,
                                                                                                               ),
                                                                                                         ),

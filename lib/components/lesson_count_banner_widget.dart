@@ -161,7 +161,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -290,7 +290,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.all(15.0),
+                            padding: EdgeInsets.only(top:15.0, bottom: 15.0, left: 20.0),
                             child: FaIcon(
                               FontAwesomeIcons.medal,
                               color: Color(0xFF0CBC87),
@@ -298,7 +298,7 @@ class _LessonCountBannerWidgetState extends State<LessonCountBannerWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding:  const EdgeInsets.only(top: 12.0, bottom: 12.0, right: 20.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,

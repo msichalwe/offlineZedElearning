@@ -147,13 +147,13 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                                         columnGetLessonsFromSubtopicsRow
                                             .lessonName,
                                         'default',
-                                      ).maybeHandleOverflow(maxChars: 60),
+                                      ).maybeHandleOverflow(maxChars: 48),
                                       maxLines: 3,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Roboto',
-                                            fontSize: 20.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -230,12 +230,20 @@ class _TestCompWidgetState extends State<TestCompWidget> {
                               FFButtonWidget(
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AssessmentWidget(
-                                              lessonId:
-                                                  columnGetLessonsFromSubtopicsRow
-                                                      .lessonId)));
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) => AssessmentWidget(
+                                        lessonId: columnGetLessonsFromSubtopicsRow.lessonId,
+                                      ),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        return FadeTransition(
+                                          opacity: animation,
+                                          child: child,
+                                        );
+                                      },
+                                    ),
+                                  );
+
                                 },
                                 text: 'Assessment',
                                 options: FFButtonOptions(

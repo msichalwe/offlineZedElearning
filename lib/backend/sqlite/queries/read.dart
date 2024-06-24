@@ -351,6 +351,7 @@ Future<List<GetSingleLessonColumnsRow>> performGetSingleLessonColumns(
 SELECT 
     l.lesson_id AS lessonId, 
     l.lesson_name AS lessonName,
+    l.created_at AS createdAt,
     (SELECT json_group_array(
         json_object(
             'lessonPhaseId', lp.lesson_phase_id,
@@ -393,6 +394,8 @@ class GetSingleLessonColumnsRow extends SqliteRow {
   int? get lessonId => data['lessonId'] as int?;
 
   String? get lessonName => data['lessonName'] as String?;
+
+  String? get createdAt => data['createdAt'] as String?;
 
   List<dynamic>? get lessonPhases => data['lessonPhases'] as List<dynamic>?;
 }
