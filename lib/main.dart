@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:window_manager/window_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import '/backend/sqlite/sqlite_manager.dart';
@@ -9,6 +9,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
   usePathUrlStrategy();
 
   await SQLiteManager.initialize();
@@ -16,6 +17,22 @@ void main() async {
 
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
+
+  WindowOptions windowOptions = WindowOptions(
+    size: Size(1390, 940),
+    center: true,
+    minimumSize: Size(1390, 940),
+    backgroundColor: Colors.black,
+    windowButtonVisibility: true,
+    title: "ZEDELEARNING OFFLINE",
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,

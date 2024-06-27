@@ -57,7 +57,8 @@ dependencies:
   url_launcher_android: 6.3.0
   url_launcher_ios: 6.2.5
   url_launcher_platform_interface: 2.3.2
-  window_manager:
+  video_player: ^2.8.7
+  window_manager: ^0.3.9
   html:
   fl_chart:
 

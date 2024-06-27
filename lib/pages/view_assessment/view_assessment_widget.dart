@@ -174,7 +174,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -209,7 +209,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                         child: BannerWidget(),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.fromLTRB(30.0, 30.0, 0,0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -218,12 +218,8 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                 context.safePop();
                               },
                               text: 'Back',
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                size: 15.0,
-                              ),
                               options: FFButtonOptions(
-                                width: 250.0,
+                                width: 150.0,
                                 height: 40.0,
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
@@ -240,7 +236,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                     ),
                                 elevation: 0.0,
                                 borderSide: const BorderSide(
-                                  color: Colors.transparent,
+                                  color: Colors.grey,
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -276,23 +272,23 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          50, 30, 0, 30),
+                                          30, 30, 0, 10),
                                       child: Text(
-                                        '${Provider.of<FFAppState>(context, listen: false).gradeName}',
+                                        '${Provider.of<FFAppState>(context, listen: false).gradeName} ${Provider.of<FFAppState>(context, listen: false).subjectName}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
-                                              fontSize: 40,
+                                              fontSize: 24,
                                               letterSpacing: 0,
-                                              fontWeight: FontWeight.w800,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Material(
-                                  elevation: 1,
+                                  elevation: 0,
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -304,15 +300,15 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        SizedBox(
-                                          width: 1200,
-                                          child: Divider(
-                                            height: 50,
-                                            thickness: 1,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                          ),
-                                        ),
+                                        // SizedBox(
+                                        //   width: 1200,
+                                        //   child: Divider(
+                                        //     height: 50,
+                                        //     thickness: 1,
+                                        //     color: FlutterFlowTheme.of(context)
+                                        //         .secondaryText,
+                                        //   ),
+                                        // ),
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -343,11 +339,11 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                           fontSize:
                                                               _currentQuestionIndex ==
                                                                       index
-                                                                  ? 25
+                                                                  ? 20
                                                                   : 15,
                                                           letterSpacing: 0,
                                                           fontWeight:
-                                                              FontWeight.w600,
+                                                              FontWeight.w400,
                                                         ),
                                                   ),
                                                 );
@@ -371,24 +367,24 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                       "p": Style(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.black87,
-                                          fontSize: FontSize(30),
-                                          fontWeight: FontWeight.bold),
+                                          fontSize: FontSize(22),
+                                          fontWeight: FontWeight.w400),
                                       "span": Style(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.black87,
-                                        fontSize: FontSize(30),
+                                        fontSize: FontSize(23),
                                       )
                                     },
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 1350,
-                                  child: Divider(
-                                    thickness: 1,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                  ),
-                                ),
+                                // SizedBox(
+                                //   width: 1350,
+                                //   child: Divider(
+                                //     thickness: .5,
+                                //     color: FlutterFlowTheme.of(context)
+                                //         .secondaryText,
+                                //   ),
+                                // ),
 
                                 // Question Buttons
                                 if (assessmentList[_currentQuestionIndex]
@@ -397,7 +393,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(10),
+                                        padding: EdgeInsets.all(15),
                                         child: FFButtonWidget(
                                           onPressed: () {
                                             setState(() {
@@ -412,7 +408,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                           },
                                           text: 'True',
                                           options: FFButtonOptions(
-                                            width: double.infinity,
+                                            width: 300,
                                             height: 50,
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -432,7 +428,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                     .override(
                                                       fontFamily: 'Readex Pro',
                                                       color: Colors.black87,
-                                                      fontSize: 19,
+                                                      fontSize: 20,
                                                       letterSpacing: 0,
                                                     ),
                                             elevation: 0,
@@ -446,7 +442,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(10),
+                                        padding: EdgeInsets.all(15),
                                         child: FFButtonWidget(
                                           onPressed: () {
                                             setState(() {
@@ -461,7 +457,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                           },
                                           text: 'False',
                                           options: FFButtonOptions(
-                                            width: double.infinity,
+                                            width: 300,
                                             height: 50,
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -505,7 +501,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(20),
+                                        padding: const EdgeInsets.all(19),
                                         child: TextField(
                                           decoration: const InputDecoration(
                                             hintText:
@@ -581,7 +577,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         color: Colors.black87,
-                                                        fontSize: FontSize(19),
+                                                        fontSize: FontSize(24),
                                                         textAlign:
                                                             TextAlign.center),
                                                     "span": Style(
@@ -599,6 +595,15 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                     },
                                   ),
                                 // Question Buttons
+                                SizedBox(
+                                  width: 1350,
+                                  height: 100,
+                                  child: Divider(
+                                    thickness: .5,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                  ),
+                                ),
 
                                 if (assessmentList[_currentQuestionIndex]
                                         .questionType ==
@@ -632,6 +637,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                               };
                                             });
                                           },
+
                                           child: Container(
                                             width: double.infinity,
                                             height: 50,
@@ -813,10 +819,8 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                     .titleSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      fontSize: 19,
+                                                      color: Colors.white,
+                                                      fontSize: 20,
                                                       letterSpacing: 0,
                                                     ),
                                             elevation: 0,
@@ -859,9 +863,7 @@ class _ViewAssessmentWidgetState extends State<ViewAssessmentWidget> {
                                                     .titleSmall
                                                     .override(
                                                       fontFamily: 'Readex Pro',
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
+                                                      color: Colors.white,
                                                       fontSize: 19,
                                                       letterSpacing: 0,
                                                     ),

@@ -373,7 +373,7 @@ class _ChooseProfileWidgetState extends State<ChooseProfileWidget> {
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
-                      labelText: 'ENTER PROFILE NAM E',
+                      labelText: 'ENTER PROFILE NAME',
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
                                 fontFamily: 'Readex Pro',

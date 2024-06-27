@@ -25,7 +25,7 @@ class SQLiteManager {
       return;
     }
     _database = await initializeDatabaseFromDbFile(
-      'lite_zed8',
+      'lite_zed7',
       'sqlLiteElearning.db',
     );
   }

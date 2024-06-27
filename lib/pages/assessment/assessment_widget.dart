@@ -118,7 +118,7 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           20, 20, 0, 20),
                                       child: Text(
-                                        '${Provider.of<FFAppState>(context, listen: false).gradeName}',
+                                        '${Provider.of<FFAppState>(context, listen: false).gradeName} ${Provider.of<FFAppState>(context, listen: false).subjectName}',
                                         style: FlutterFlowTheme
                                             .of(context)
                                             .bodyMedium
@@ -245,13 +245,20 @@ class _AssessmentWidgetState extends State<AssessmentWidget> {
                                                       return GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => ViewAssessmentWidget(
-                                                                      assessmentId: snapshot
-                                                                          .data!
-                                                                          .first
-                                                                          .assessmentId)));
+                                                            context,
+                                                            PageRouteBuilder(
+                                                              pageBuilder: (context, animation, secondaryAnimation) => ViewAssessmentWidget(
+                                                                assessmentId: snapshot.data!.first.assessmentId,
+                                                              ),
+                                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                                return FadeTransition(
+                                                                  opacity: animation,
+                                                                  child: child,
+                                                                );
+                                                              },
+                                                            ),
+                                                          );
+
                                                         },
                                                         child: Container(
                                                           width:

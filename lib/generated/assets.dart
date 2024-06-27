@@ -26,6 +26,7 @@ class Assets {
   static const String lottieAnimationsFavicon = 'assets/lottie_animations/favicon.png';
   static const String pdfsFavicon = 'assets/pdfs/favicon.png';
   static const String riveAnimationsFavicon = 'assets/rive_animations/favicon.png';
+  static const String sqliteDbFilesSqlLiteElearning = 'assets/sqlite_db_files/sqlLiteElearning.db';
   static const String videosFavicon = 'assets/videos/favicon.png';
 
 }
