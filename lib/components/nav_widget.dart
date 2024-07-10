@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:school_platform_windows/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:school_platform_windows/pages/search/search_screen_widget.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -57,26 +58,44 @@ class _NavWidgetState extends State<NavWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
+            padding: const EdgeInsets.fromLTRB(34.0, 14.0, 14.0, 14.0),
+            child: FlutterFlowIconButton(
+              borderColor: FlutterFlowTheme.of(context).primaryText,
+              borderRadius: 15.0,
+              borderWidth: 1.0,
+              buttonSize: 50.0,
+              fillColor: FlutterFlowTheme.of(context).primaryText,
+              icon: Icon(
+                Icons.arrow_back,
+                color: FlutterFlowTheme.of(context).alternate,
+                size: 30.0,
+              ),
+              onPressed: () async {
                 context.safePop();
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  'assets/images/Coat_of_arms_of_Zambia.svg.png',
-                  width: 70.0,
-                  height: 70.0,
-                  fit: BoxFit.contain,
-                ),
-              ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.all(14.0),
+          //   child: InkWell(
+          //     splashColor: Colors.transparent,
+          //     focusColor: Colors.transparent,
+          //     hoverColor: Colors.transparent,
+          //     highlightColor: Colors.transparent,
+          //     onTap: () async {
+          //       context.safePop();
+          //     },
+          //     child: ClipRRect(
+          //       borderRadius: BorderRadius.circular(8.0),
+          //       child: Image.asset(
+          //         'assets/images/Coat_of_arms_of_Zambia.svg.png',
+          //         width: 70.0,
+          //         height: 70.0,
+          //         fit: BoxFit.contain,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
             child: Container(

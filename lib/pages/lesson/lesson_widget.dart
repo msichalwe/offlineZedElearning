@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:school_platform_windows/components/video_player_widget.dart';
 import 'package:school_platform_windows/pages/assessment/assessment_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -115,12 +116,15 @@ class _LessonWidgetState extends State<LessonWidget>
   Future<void> _loadProgress() async {
     int? progress = await getLessonProgress(
         FFAppState().currentUser.hashCode.toString(),
-                                          widget.lessonId.toString());
+        widget.lessonId.toString());
     setState(() {
       _progressValue =
           progress!.toDouble() ?? 0; // Default to 0 if no progress is found
     });
   }
+
+  int listOfPages = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -184,44 +188,11 @@ class _LessonWidgetState extends State<LessonWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.safePop();
-                                      },
-                                      text: 'Back',
-                                      icon: const Icon(
-                                        Icons.arrow_back,
-                                        size: 10.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: 100.0,
-                                        height: 30.0,
-                                        padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        iconPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        color: const Color(0xFF066AC9),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                          fontFamily: 'Roboto',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                        elevation: 0.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8.0),
-                                      ),
-                                    ),
+
                                     Padding(
                                       padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 25.0, 0.0, 0.0),
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 25.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
                                           containerGetSingleLessonColumnsRowList
@@ -231,37 +202,36 @@ class _LessonWidgetState extends State<LessonWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                          fontFamily: 'Roboto',
-                                          fontSize: 28.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w400,
-                                        ),
+                                              fontFamily: 'Roboto',
+                                              fontSize: 28.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w400,
+                                            ),
                                       ).animateOnPageLoad(animationsMap[
-                                      'textOnPageLoadAnimation']!),
+                                          'textOnPageLoadAnimation']!),
                                     ),
                                     Padding(
                                       padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 0.0),
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 5.0, 0.0, 0.0),
                                       child: Text(
                                         'Lesson Video Playlist',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                          fontFamily: 'Roboto',
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                              fontFamily: 'Roboto',
+                                              fontSize: 18.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                       ),
                                     ),
                                     Container(
                                       width: 500.0,
                                       decoration: const BoxDecoration(),
                                       child: Padding(
-                                        padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 10.0, 0.0, 0.0),
                                         child: SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
@@ -271,26 +241,26 @@ class _LessonWidgetState extends State<LessonWidget>
                                                 height: 50.0,
                                                 child: VerticalDivider(
                                                   thickness: 0.5,
-                                                  color:
-                                                  FlutterFlowTheme.of(context)
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryText,
                                                 ),
                                               ),
                                               Padding(
                                                 padding:
-                                                const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                    10.0, 0.0, 10.0, 0.0),
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        10.0, 0.0, 10.0, 0.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        12.0),
+                                                        BorderRadius.circular(
+                                                            12.0),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0),
+                                                        BorderRadius.circular(
+                                                            8.0),
                                                     child: Image.asset(
                                                       'assets/images/Screenshot_2024-03-21_at_4.48.20_PM.png',
                                                       width: 100.0,
@@ -304,26 +274,26 @@ class _LessonWidgetState extends State<LessonWidget>
                                                 height: 50.0,
                                                 child: VerticalDivider(
                                                   thickness: 0.5,
-                                                  color:
-                                                  FlutterFlowTheme.of(context)
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryText,
                                                 ),
                                               ),
                                               Padding(
                                                 padding:
-                                                const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                    10.0, 0.0, 10.0, 0.0),
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        10.0, 0.0, 10.0, 0.0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        12.0),
+                                                        BorderRadius.circular(
+                                                            12.0),
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0),
+                                                        BorderRadius.circular(
+                                                            8.0),
                                                     child: Image.asset(
                                                       'assets/images/Screenshot_2024-03-21_at_4.49.02_PM.png',
                                                       width: 100.0,
@@ -376,12 +346,12 @@ class _LessonWidgetState extends State<LessonWidget>
                                     // ),
                                     Padding(
                                       padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 8.0),
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 8.0, 0.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           const FaIcon(
                                             FontAwesomeIcons.infoCircle,
@@ -392,14 +362,14 @@ class _LessonWidgetState extends State<LessonWidget>
                                             padding: const EdgeInsetsDirectional
                                                 .fromSTEB(10.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Last updated at ${containerGetSingleLessonColumnsRowList
-                                                  .first.createdAt}',
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                fontFamily: 'Roboto',
-                                                letterSpacing: 0.0,
-                                              ),
+                                              'Last updated at ${containerGetSingleLessonColumnsRowList.first.createdAt}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Roboto',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ),
                                         ],
@@ -413,7 +383,7 @@ class _LessonWidgetState extends State<LessonWidget>
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              45.0, 15.0, 45.0, 0.0),
+                              45.0, 15.0, 45.0, 30.0),
                           child: Container(
                             // width: double.infinity,
                             decoration: BoxDecoration(
@@ -421,7 +391,8 @@ class _LessonWidgetState extends State<LessonWidget>
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(14.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).secondaryText,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 width: 0.2,
                               ),
                             ),
@@ -430,8 +401,8 @@ class _LessonWidgetState extends State<LessonWidget>
                                   10.0, 10.0, 10.0, 20.0),
                               child: Container(
                                 decoration: const BoxDecoration(),
-                                child:
-                                FutureBuilder<List<GetPhasesFromLessonIdRow>>(
+                                child: FutureBuilder<
+                                    List<GetPhasesFromLessonIdRow>>(
                                   future: SQLiteManager.instance
                                       .getPhasesFromLessonId(
                                     lessonId: widget.lessonId,
@@ -445,7 +416,7 @@ class _LessonWidgetState extends State<LessonWidget>
                                           height: 50.0,
                                           child: CircularProgressIndicator(
                                             valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                                AlwaysStoppedAnimation<Color>(
                                               FlutterFlowTheme.of(context)
                                                   .primary,
                                             ),
@@ -454,640 +425,679 @@ class _LessonWidgetState extends State<LessonWidget>
                                       );
                                     }
                                     final pageViewGetPhasesFromLessonIdRowList =
-                                    snapshot.data!;
+                                        snapshot.data!;
                                     _lessonLength =
                                         pageViewGetPhasesFromLessonIdRowList
                                             .length;
 
-                                    return Container(
-                                      width: double.infinity,
-                                      height: 600,
-                                      child: Stack(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
-                                            child: PageView.builder(
-                                              physics: const NeverScrollableScrollPhysics(),
-                                              controller: _model.pageViewController ??= PageController(
-                                                  initialPage: min(0, pageViewGetPhasesFromLessonIdRowList.length - 1)),
-                                              onPageChanged: (_) => setState(() {}),
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: pageViewGetPhasesFromLessonIdRowList.length,
-                                              itemBuilder: (context, pageViewIndex) {
-                                                final pageViewGetPhasesFromLessonIdRow = pageViewGetPhasesFromLessonIdRowList[pageViewIndex];
-                                                return SingleChildScrollView(
-                                                  physics: ScrollPhysics(),
-                                                  primary: true,
-                                                  child: Column(
-                                                    mainAxisSize: MainAxisSize.max,
-                                                    children: [
-                                                      if (pageViewGetPhasesFromLessonIdRow.tip != null &&
-                                                          pageViewGetPhasesFromLessonIdRow.tip != '')
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(14.0),
-                                                          child: Container(
-                                                            width: MediaQuery.sizeOf(context).width,
-                                                            height: 100.0,
-                                                            decoration: BoxDecoration(
-                                                              color: const Color(0xFFF2F4F5),
-                                                              borderRadius: BorderRadius.circular(4.0),
-                                                            ),
-                                                            child: Row(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Container(
-                                                                  width: 14.0,
-                                                                  height: 100.0,
-                                                                  decoration: const BoxDecoration(
-                                                                    color: Color(0xFF007BFF),
-                                                                  ),
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          height: 600,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        0.0, 0.0, 0.0, 40.0),
+                                                child: PageView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  controller: _model
+                                                          .pageViewController ??=
+                                                      PageController(
+                                                          initialPage: min(
+                                                              0,
+                                                              pageViewGetPhasesFromLessonIdRowList
+                                                                      .length -
+                                                                  1)),
+                                                  onPageChanged: (_) =>
+                                                      setState(() {}),
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount:
+                                                      pageViewGetPhasesFromLessonIdRowList
+                                                          .length,
+                                                  itemBuilder:
+                                                      (context, pageViewIndex) {
+                                                    listOfPages =
+                                                        pageViewGetPhasesFromLessonIdRowList
+                                                            .length;
+                                                    final pageViewGetPhasesFromLessonIdRow =
+                                                        pageViewGetPhasesFromLessonIdRowList[
+                                                            pageViewIndex];
+
+                                                    final mediaFiles =
+                                                        functions
+                                                            .getStringAndConvertToJsonArray(
+                                                          pageViewGetPhasesFromLessonIdRow.mediaFiles,
+                                                        )
+                                                            ?.toList() ??
+                                                            [];
+
+                                                    return SingleChildScrollView(
+                                                      physics: ScrollPhysics(),
+                                                      primary: true,
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          if (pageViewGetPhasesFromLessonIdRow
+                                                                      .tip !=
+                                                                  null &&
+                                                              pageViewGetPhasesFromLessonIdRow
+                                                                      .tip !=
+                                                                  '')
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(
+                                                                      14.0),
+                                                              child: Container(
+                                                                width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width,
+                                                                height: 100.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: const Color(
+                                                                      0xFFF2F4F5),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4.0),
                                                                 ),
-                                                                Column(
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  mainAxisSize: MainAxisSize.max,
+                                                                child: Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
                                                                   children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                                                                      child: Row(
-                                                                        mainAxisSize: MainAxisSize.max,
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                                                                            child: Icon(
-                                                                              Icons.lightbulb_rounded,
-                                                                              color: FlutterFlowTheme.of(context).warning,
-                                                                              size: 32.0,
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
-                                                                            child: Text(
-                                                                              'TIP:',
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                fontFamily: 'Roboto',
-                                                                                fontSize: 24.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontStyle: FontStyle.italic,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
+                                                                    Container(
+                                                                      width:
+                                                                          14.0,
+                                                                      height:
+                                                                          100.0,
+                                                                      decoration:
+                                                                          const BoxDecoration(
+                                                                        color: Color(
+                                                                            0xFF007BFF),
                                                                       ),
                                                                     ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
-                                                                      child: Text(
-                                                                        valueOrDefault<String>(
-                                                                          pageViewGetPhasesFromLessonIdRow.tip,
-                                                                          'TIP',
+                                                                    Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: const EdgeInsetsDirectional
+                                                                              .fromSTEB(
+                                                                              20.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                                                                child: Icon(
+                                                                                  Icons.lightbulb_rounded,
+                                                                                  color: FlutterFlowTheme.of(context).warning,
+                                                                                  size: 32.0,
+                                                                                ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  'TIP:',
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Roboto',
+                                                                                        fontSize: 24.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                        fontStyle: FontStyle.italic,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                          fontFamily: 'Roboto',
-                                                                          fontSize: 18.0,
-                                                                          letterSpacing: 0.0,
+                                                                        Padding(
+                                                                          padding: const EdgeInsetsDirectional
+                                                                              .fromSTEB(
+                                                                              20.0,
+                                                                              10.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              pageViewGetPhasesFromLessonIdRow.tip,
+                                                                              'TIP',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Roboto',
+                                                                                  fontSize: 18.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
+                                                                          ),
                                                                         ),
-                                                                      ),
+                                                                      ],
                                                                     ),
                                                                   ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    12.0),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: <Widget>[
+                                                                Text(
+                                                                    '${(_progressValue).round()}%'),
+                                                                SizedBox(
+                                                                    height:
+                                                                        8.0), // Add spacing between progress bar and text
+                                                                Container(
+                                                                  height:
+                                                                      5.0, // Adjust the height as needed
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(5)), // Rounded corners
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .withOpacity(
+                                                                            0.5), // Change opacity if needed
+                                                                  ),
+                                                                  child:
+                                                                      LinearProgressIndicator(
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent, // Make the background transparent
+                                                                    valueColor: AlwaysStoppedAnimation<
+                                                                            Color>(
+                                                                        Color(
+                                                                            0xff0D52BC)),
+                                                                    value:
+                                                                        _progressValue /
+                                                                            100,
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ),
-                                                      Container(
-                                                        padding: EdgeInsets.all(12.0),
-                                                        child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: <Widget>[
-                                                            Text('${(_progressValue).round()}%'),
-                                                            SizedBox(height: 8.0), // Add spacing between progress bar and text
-                                                            Container(
-                                                              height: 5.0, // Adjust the height as needed
-                                                              decoration: BoxDecoration(
-                                                                borderRadius: BorderRadius.all(Radius.circular(5)), // Rounded corners
-                                                                color: Colors.grey.withOpacity(0.5), // Change opacity if needed
-                                                              ),
-                                                              child: LinearProgressIndicator(
-                                                                backgroundColor: Colors.transparent, // Make the background transparent
-                                                                valueColor: AlwaysStoppedAnimation<Color>(Color(0xff0D52BC)),
-                                                                value: _progressValue / 100,
-                                                              ),
-                                                            ),
-
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                        child: Html(
-                                                          data: pageViewGetPhasesFromLessonIdRow.textContent ?? 'No data',
-                                                          onLinkTap: (url, _, __, ___) => launchURL(url!),
-                                                          style: {
-                                                            "body": Style(
-                                                              margin: EdgeInsets.zero,
-                                                              padding: EdgeInsets.zero,
-                                                            ),
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Builder(
-                                                        builder: (context) {
-                                                          final mediaFiles = functions.getStringAndConvertToJsonArray(
-                                                            pageViewGetPhasesFromLessonIdRow.mediaFiles,
-                                                          )?.toList() ?? [];
-                                                          return Container(
-                                                            child: Wrap(
-                                                              children: List.generate(mediaFiles.length, (mediaFilesIndex) {
-                                                                final mediaFilesItem = mediaFiles[mediaFilesIndex];
-                                                                return Container(
-                                                                  child: SingleChildScrollView(
-                                                                    child: Column(
-                                                                      mainAxisSize: MainAxisSize.min,
-                                                                      children: [
-                                                                        //<< --------------- if the media is top -------------->>>>
-                                                                        if(functions.convertJsonPathToString(
-                                                                          getJsonField(
-                                                                            mediaFilesItem,
-                                                                            r'''$.textPosition''',
-                                                                          ).toString(),
-                                                                        ) == 'top')...[
-                                                                          if ((functions.convertJsonPathToString(
-                                                                            getJsonField(
-                                                                              mediaFilesItem,
-                                                                              r'''$.mediaType''',
-                                                                            ).toString(),
-                                                                          ) != null &&
-                                                                              functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) != '') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpeg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/png'))...[
-                                                                            Column(
-                                                                              children: [
-                                                                                ClipRRect(
-                                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                                  child: Image.network(
-                                                                                    getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaUrl''',
-                                                                                    ).toString(),
-                                                                                    width: 300.0,
-                                                                                    height: 200.0,
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                                                  child: Html(
-                                                                                    data: getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaDescription''',
-                                                                                    ).toString(),
-                                                                                    onLinkTap: (url, _, __, ___) => launchURL(url!),
-                                                                                    style: {
-                                                                                      "body": Style(
-                                                                                        margin: EdgeInsets.zero,
-                                                                                        padding: EdgeInsets.zero,
-                                                                                      ),
-                                                                                    },
-                                                                                    shrinkWrap: true,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            )
-                                                                          ]
-
-                                                                        ],
-
-
-                                                                        //<< --------------- if the media is bottom -------------->>>>
-                                                                        if(functions.convertJsonPathToString(
-                                                                          getJsonField(
-                                                                            mediaFilesItem,
-                                                                            r'''$.textPosition''',
-                                                                          ).toString(),
-                                                                        ) == 'bottom')...[
-                                                                          if ((functions.convertJsonPathToString(
-                                                                            getJsonField(
-                                                                              mediaFilesItem,
-                                                                              r'''$.mediaType''',
-                                                                            ).toString(),
-                                                                          ) != null &&
-                                                                              functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) != '') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpeg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/png'))...[
-                                                                            Column(
-                                                                              children: [
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                                                  child: Html(
-                                                                                    data: getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaDescription''',
-                                                                                    ).toString(),
-                                                                                    onLinkTap: (url, _, __, ___) => launchURL(url!),
-                                                                                    style: {
-                                                                                      "body": Style(
-                                                                                        margin: EdgeInsets.zero,
-                                                                                        padding: EdgeInsets.zero,
-                                                                                      ),
-                                                                                    },
-                                                                                    shrinkWrap: true,
-                                                                                  ),
-                                                                                ),
-                                                                                ClipRRect(
-                                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                                  child: Image.network(
-                                                                                    getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaUrl''',
-                                                                                    ).toString(),
-                                                                                    width: 300.0,
-                                                                                    height: 200.0,
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
-                                                                                ),
-
-                                                                              ],
-                                                                            )
-                                                                          ]
-
-                                                                        ],
-
-
-                                                                        //<< --------------- if the media is left -------------->>>>
-                                                                        if(functions.convertJsonPathToString(
-                                                                          getJsonField(
-                                                                            mediaFilesItem,
-                                                                            r'''$.textPosition''',
-                                                                          ).toString(),
-                                                                        ) == 'left')...[
-                                                                          if ((functions.convertJsonPathToString(
-                                                                            getJsonField(
-                                                                              mediaFilesItem,
-                                                                              r'''$.mediaType''',
-                                                                            ).toString(),
-                                                                          ) != null &&
-                                                                              functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) != '') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpeg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/png'))...[
-                                                                            Row(
-                                                                              children: [
-
-                                                                                ClipRRect(
-                                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                                  child: Image.network(
-                                                                                    getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaUrl''',
-                                                                                    ).toString(),
-                                                                                    width: 300.0,
-                                                                                    height: 200.0,
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                                                  child: Html(
-                                                                                    data: getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaDescription''',
-                                                                                    ).toString(),
-                                                                                    onLinkTap: (url, _, __, ___) => launchURL(url!),
-                                                                                    style: {
-                                                                                      "body": Style(
-                                                                                        margin: EdgeInsets.zero,
-                                                                                        padding: EdgeInsets.zero,
-                                                                                      ),
-                                                                                    },
-                                                                                    shrinkWrap: true,
-                                                                                  ),
-                                                                                ),
-
-                                                                              ],
-                                                                            )
-                                                                          ]
-
-                                                                        ],
-
-                                                                        //<< --------------- if the media is right -------------->>>>
-                                                                        if(functions.convertJsonPathToString(
-                                                                          getJsonField(
-                                                                            mediaFilesItem,
-                                                                            r'''$.textPosition''',
-                                                                          ).toString(),
-                                                                        ) == 'right')...[
-                                                                          if ((functions.convertJsonPathToString(
-                                                                            getJsonField(
-                                                                              mediaFilesItem,
-                                                                              r'''$.mediaType''',
-                                                                            ).toString(),
-                                                                          ) != null &&
-                                                                              functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) != '') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/jpeg') ||
-                                                                              (functions.convertJsonPathToString(
-                                                                                getJsonField(
-                                                                                  mediaFilesItem,
-                                                                                  r'''$.mediaType''',
-                                                                                ).toString(),
-                                                                              ) == 'image/png'))...[
-                                                                            Row(
-                                                                              children: [
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                                                                  child: Html(
-                                                                                    data: getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaDescription''',
-                                                                                    ).toString(),
-                                                                                    onLinkTap: (url, _, __, ___) => launchURL(url!),
-                                                                                    style: {
-                                                                                      "body": Style(
-                                                                                        margin: EdgeInsets.zero,
-                                                                                        padding: EdgeInsets.zero,
-                                                                                      ),
-                                                                                    },
-                                                                                    shrinkWrap: true,
-                                                                                  ),
-                                                                                ),
-                                                                                ClipRRect(
-                                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                                  child: Image.network(
-                                                                                    getJsonField(
-                                                                                      mediaFilesItem,
-                                                                                      r'''$.mediaUrl''',
-                                                                                    ).toString(),
-                                                                                    width: 300.0,
-                                                                                    height: 200.0,
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
-                                                                                ),
-
-
-                                                                              ],
-                                                                            )
-                                                                          ]
-
-                                                                        ],
-
-                                                                      ],
-                                                                    ),
+                                                          if ( mediaFiles.length < 1 && mediaFiles.isEmpty || pageViewGetPhasesFromLessonIdRow
+                                                              .textContent
+                                                              ?.isNotEmpty ==
+                                                              true )
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          14.0),
+                                                              child: Html(
+                                                                data: pageViewGetPhasesFromLessonIdRow
+                                                                            .textContent
+                                                                            ?.isNotEmpty ==
+                                                                        true
+                                                                    ? pageViewGetPhasesFromLessonIdRow
+                                                                        .textContent!
+                                                                    : '<div class="no-data">Next lesson Phase, nothing to see on this one</div>',
+                                                                onLinkTap: (url,
+                                                                        _,
+                                                                        __,
+                                                                        ___) =>
+                                                                    launchURL(
+                                                                        url!),
+                                                                style: {
+                                                                  "body": Style(
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .zero,
                                                                   ),
-                                                                );
-                                                              }),
+                                                                  "table": Style(
+                                                                    backgroundColor: Colors.grey.shade200, // Custom style for table background
+                                                                    padding: EdgeInsets.all(8.0),
+                                                                  ),
+                                                                  "th": Style(
+                                                                    padding: EdgeInsets.all(6.0),
+                                                                    backgroundColor: Colors.grey.shade300,
+                                                                    border: Border.all(color: Colors.black),
+                                                                  ),
+                                                                  "td": Style(
+                                                                    padding: EdgeInsets.all(6.0),
+                                                                    backgroundColor: Colors.white,
+                                                                    border: Border.all(color: Colors.black),
+                                                                  ),
+                                                                  ".no-data":
+                                                                      Style(
+                                                                    fontSize:
+                                                                        FontSize
+                                                                            .large, // You can adjust the size
+                                                                    color: Colors
+                                                                        .grey, // Change to desired color
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center, // Center the text
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            20), // Add padding for better appearance
+                                                                  ),
+                                                                },
+                                                              ),
                                                             ),
-                                                          );
-                                                        },
+                                                          Builder(
+                                                            builder: (context) {
+                                                              print(mediaFiles);
+
+                                                              return Container(
+                                                                child: Wrap(
+                                                                  children: List.generate(mediaFiles.length, (mediaFilesIndex) {
+                                                                    final mediaFilesItem = mediaFiles[mediaFilesIndex];
+                                                                    final mediaType = functions.convertJsonPathToString(
+                                                                      getJsonField(mediaFilesItem, r'''$.mediaType''').toString(),
+                                                                    );
+                                                                    final mediaUrl = getJsonField(mediaFilesItem, r'''$.mediaUrl''').toString();
+                                                                    final mediaDescription = getJsonField(mediaFilesItem, r'''$.mediaDescription''').toString();
+                                                                    final textPosition = functions.convertJsonPathToString(
+                                                                      getJsonField(mediaFilesItem, r'''$.textPosition''').toString(),
+                                                                    );
+
+                                                                    bool isValidImageType(String type) {
+                                                                      return ['image/png', 'image/jpeg', 'image/gif'].contains(type);
+                                                                    }
+
+                                                                    bool isValidVideoType(String type) {
+                                                                      return ['video/mp4', 'video/ogg', 'video/webm', 'video/mpg', 'video/mkv'].contains(type);
+                                                                    }
+
+                                                                    Widget buildVideo() {
+                                                                      return Padding(
+                                                                        padding: const EdgeInsets.all(8.0),
+                                                                        child: ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(8.0),
+                                                                          child: Container(
+                                                                            width: 800,
+                                                                            child: AspectRatio(
+                                                                              aspectRatio: 16 / 9,
+                                                                              child: VideoPlayerWidget(
+                                                                                videoUrl: mediaUrl,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    Widget buildImage() {
+                                                                      return Padding(
+                                                                        padding: const EdgeInsets.all(8.0),
+                                                                        child: ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(8.0),
+                                                                          child: Image.network(
+                                                                            mediaUrl,
+                                                                            width: 400.0,
+                                                                            fit: BoxFit.cover,
+                                                                            errorBuilder: (context, error, stackTrace) => Container(
+                                                                              width: 300.0,
+                                                                              height: 200.0,
+                                                                              color: Colors.grey,
+                                                                              child: Icon(Icons.broken_image, color: Colors.white),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    Widget buildDescription(BuildContext context) {
+                                                                      return Padding(
+                                                                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                                                                        child: ConstrainedBox(
+                                                                          constraints: BoxConstraints(
+                                                                            maxWidth: MediaQuery.of(context).size.width - 20, // Subtract padding to get available width
+                                                                          ),
+                                                                          child: Html(
+                                                                            data: mediaDescription,
+                                                                            onLinkTap: (url, _, __, ___) => launchURL(url!),
+                                                                            // customRenders: {
+                                                                            //   "table":(context, child){
+                                                                            //     return SingleChildScrollView(
+                                                                            //       scrollDirection: Axis.horizontal,
+                                                                            //       child: (child as Table),
+                                                                            //     );
+                                                                            //   }
+                                                                            // },
+                                                                            style: {
+                                                                              "body": Style(
+                                                                                margin: EdgeInsets.zero,
+                                                                                padding: EdgeInsets.zero,
+                                                                                whiteSpace: WhiteSpace.NORMAL, // Ensure text wraps
+                                                                              ),
+                                                                              "table": Style(
+                                                                                backgroundColor: Colors.grey.shade200, // Custom style for table background
+                                                                                padding: EdgeInsets.all(8.0),
+                                                                              ),
+                                                                              "th": Style(
+                                                                                padding: EdgeInsets.all(6.0),
+                                                                                backgroundColor: Colors.grey.shade300,
+                                                                                border: Border.all(color: Colors.black),
+                                                                              ),
+                                                                              "td": Style(
+                                                                                padding: EdgeInsets.all(6.0),
+                                                                                backgroundColor: Colors.white,
+                                                                                border: Border.all(color: Colors.black),
+                                                                              ),
+                                                                            },
+
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    if (mediaType == null || mediaType.isEmpty || (!isValidImageType(mediaType) && !isValidVideoType(mediaType))) {
+                                                                      return SizedBox.shrink(); // Return an empty widget if media type is invalid
+                                                                    }
+
+                                                                    Widget mediaWidget;
+                                                                    if (isValidImageType(mediaType)) {
+                                                                      mediaWidget = buildImage();
+                                                                    } else if (isValidVideoType(mediaType)) {
+                                                                      mediaWidget = buildVideo();
+                                                                    } else {
+                                                                      mediaWidget = SizedBox.shrink(); // Fallback in case of unexpected type
+                                                                    }
+
+                                                                    return Container(
+                                                                      child: SingleChildScrollView(
+                                                                        child: Column(
+                                                                          mainAxisSize: MainAxisSize.min,
+                                                                          children: [
+                                                                            if (textPosition == 'top') ...[
+                                                                              buildDescription(context),
+                                                                              mediaWidget,
+                                                                            ] else if (textPosition == 'bottom') ...[
+                                                                              mediaWidget,
+                                                                              buildDescription(context),
+                                                                            ] else if (textPosition == 'left') ...[
+                                                                              Row(
+                                                                                children: [
+                                                                                  Flexible(
+                                                                                    child: buildDescription(context),
+                                                                                  ),
+                                                                                  Flexible(
+                                                                                    child: mediaWidget,
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ] else if (textPosition == 'right') ...[
+                                                                              Row(
+                                                                                children: [
+                                                                                  Flexible(
+                                                                                    child: mediaWidget,
+                                                                                  ),
+                                                                                  Flexible(
+                                                                                    child: buildDescription(context),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            height: 100.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                if (_model
+                                                        .pageViewCurrentIndex >
+                                                    0)
+                                                  FFButtonWidget(
+                                                    onPressed: () async {
+                                                      await _model
+                                                          .pageViewController
+                                                          ?.previousPage(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.ease,
+                                                      );
+                                                    },
+                                                    text: 'PREVIOUS',
+                                                    options: FFButtonOptions(
+                                                      height: 40.0,
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(24.0,
+                                                              0.0, 24.0, 0.0),
+                                                      iconPadding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(0.0,
+                                                              0.0, 0.0, 0.0),
+                                                      color: const Color(
+                                                          0xFFF8F8F8),
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: const Color(
+                                                                    0xFF007BFF),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      elevation: 0.0,
+                                                      borderSide:
+                                                          const BorderSide(
+                                                        color:
+                                                            Color(0xFF007BFF),
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
                                                   ),
-                                                );
-                                              },
+                                                if (_model
+                                                        .pageViewCurrentIndex <
+                                                    (_lessonLength - 1))
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(40.0, 0.0,
+                                                            0.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        if (_currentPhase !=
+                                                            _lessonLength + 1) {
+                                                          _updateProgress((_currentPhase
+                                                                      .toDouble() /
+                                                                  _lessonLength) *
+                                                              100);
+
+                                                          _currentPhase += 1;
+
+                                                          saveLessonProgress(
+                                                              FFAppState()
+                                                                  .currentUser
+                                                                  .hashCode
+                                                                  .toString(),
+                                                              widget.lessonId
+                                                                  .toString(),
+                                                              _progressValue
+                                                                  .toInt());
+
+                                                          print('Kaya');
+                                                          print(_test);
+                                                          // prefs.setInt(widget.lessonId.toString(),
+                                                          //     _currentPhase);
+                                                        }
+
+                                                        await _model
+                                                            .pageViewController
+                                                            ?.nextPage(
+                                                          duration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      300),
+                                                          curve: Curves.ease,
+                                                        );
+                                                      },
+                                                      text: 'NEXT',
+                                                      options: FFButtonOptions(
+                                                        height: 40.0,
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(24.0,
+                                                                0.0, 24.0, 0.0),
+                                                        iconPadding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(0.0,
+                                                                0.0, 0.0, 0.0),
+                                                        color: const Color(
+                                                            0xFFF8F8F8),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Roboto',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: const Color(
+                                                                      0xFF007BFF),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                        elevation: 0.0,
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color:
+                                                              Color(0xFF007BFF),
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                if (_model
+                                                        .pageViewCurrentIndex ==
+                                                    (_lessonLength - 1))
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(40.0, 0.0,
+                                                            0.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (context, animation, secondaryAnimation) => AssessmentWidget(
+                                                              lessonId: widget.lessonId,
+                                                            ),
+                                                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                              return FadeTransition(
+                                                                opacity: animation,
+                                                                child: child,
+                                                              );
+                                                            },
+                                                          ),
+                                                        );
+                                                      },
+                                                      text: 'Take Assessment',
+                                                      // icon: const FaIcon(
+                                                      //   FontAwesomeIcons.question,
+                                                      //   color: Color(0xFFF8F8F8),
+                                                      // ),
+                                                      options: FFButtonOptions(
+                                                        height: 40.0,
+                                                        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                        iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                        color: FlutterFlowTheme.of(context).tertiary,
+                                                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                          fontFamily: 'Roboto',
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                        elevation: 0.0,
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme.of(context).tertiary,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(8.0),
+                                                      ),
+                                                    )
+                                                    ,
+                                                  ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     );
                                   },
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 30.0),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (_model.pageViewCurrentIndex > 0)
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      await _model.pageViewController
-                                          ?.previousPage(
-                                        duration:
-                                        const Duration(milliseconds: 300),
-                                        curve: Curves.ease,
-                                      );
-
-                                    },
-                                    text: 'PREVIOUS',
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      color: const Color(0xFFF8F8F8),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF007BFF),
-                                        letterSpacing: 0.0,
-                                      ),
-                                      elevation: 0.0,
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFF007BFF),
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      40.0, 0.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      if (_currentPhase != _lessonLength + 1) {
-                                        _updateProgress(
-                                            (_currentPhase.toDouble() /
-                                                _lessonLength) *
-                                                100);
-
-                                        _currentPhase += 1;
-
-                                        saveLessonProgress(
-                                            FFAppState().currentUser.hashCode.toString(),
-                                            widget.lessonId.toString(),
-                                            _progressValue.toInt());
-
-                                        print('Kaya');
-                                        print(_test);
-                                        // prefs.setInt(widget.lessonId.toString(),
-                                        //     _currentPhase);
-                                      }
-
-                                      await _model.pageViewController?.nextPage(
-                                        duration:
-                                        const Duration(milliseconds: 300),
-                                        curve: Curves.ease,
-                                      );
-                                    },
-                                    text: 'NEXT',
-
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      color: const Color(0xFFF8F8F8),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF007BFF),
-                                        letterSpacing: 0.0,
-                                      ),
-                                      elevation: 0.0,
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFF007BFF),
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      40.0, 0.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AssessmentWidget(
-                                                    lessonId: widget.lessonId,
-                                                  )));
-                                    },
-                                    text: 'Take Assessment',
-                                    // icon: const FaIcon(
-                                    //   FontAwesomeIcons.question,
-                                    //   color: Color(0xFFF8F8F8),
-                                    // ),
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                      FlutterFlowTheme.of(context).tertiary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
-                                      ),
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
-                                        color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ),

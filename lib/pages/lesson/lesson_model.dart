@@ -21,6 +21,8 @@ class LessonModel extends FlutterFlowModel<LessonWidget> {
   // Model for footer component.
   late FooterModel footerModel;
 
+  // int get pageViewTotalPages => pageViewController!.positions.length;
+
   @override
   void initState(BuildContext context) {
     navModel = createModel(context, () => NavModel());
